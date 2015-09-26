@@ -26,7 +26,7 @@ void MainWindow::on_pushButton_clicked()
     {
 
         QMessageBox msg;
-        msg.setText("Could not load image");
+        msg.setText("Couldn't load image");
         msg.exec();
 
     }
