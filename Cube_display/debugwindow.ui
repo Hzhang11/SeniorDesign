@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DebugWindow</class>
+ <widget class="QMainWindow" name="DebugWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>867</width>
+    <height>589</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>430</y>
+      <width>271</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="leftButton">
+       <property name="text">
+        <string>Test Top</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="centerButton">
+       <property name="text">
+        <string>Test Left</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="rightButton">
+       <property name="text">
+        <string>Test Right</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="solveButton">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>250</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Solve</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>120</y>
+      <width>181</width>
+      <height>78</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>50</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>43</width>
+      <height>43</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>141</width>
+      <height>141</height>
+     </size>
+    </property>
+    <layout class="QGridLayout" name="cube_top_layout">
+     <item row="0" column="1">
+      <widget class="QLabel" name="cubie_top_2">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U2</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="cubie_top_1">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U1</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="cubie_top_5">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U5</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="cubie_top_8">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U8</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="cubie_top_7">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U7</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="cubie_top_4">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U4</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="cubie_top_3">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U3</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="cubie_top_9">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U9</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="cubie_top_6">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>U6</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>200</y>
+      <width>143</width>
+      <height>143</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="cube_left_layout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="cubie_left_1">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L1</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="cubie_left_6">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L6</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="cubie_left_7">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L7</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="cubie_left_8">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L8</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="cubie_left_4">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L4</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="cubie_left_2">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L2</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="cubie_left_9">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L9</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="cubie_left_3">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L3</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="cubie_left_5">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>L5</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>200</y>
+      <width>143</width>
+      <height>143</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="cube_left_layout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="cubie_front_1">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F1</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="cubie_front_6">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F6</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="cubie_front_7">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F7</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="cubie_front_8">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F8</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="cubie_front_4">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F4</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="cubie_front_2">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F2</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="cubie_front_9">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F9</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="cubie_front_3">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F3</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="cubie_front_5">
+       <property name="minimumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>43</width>
+         <height>43</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>F5</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>867</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
