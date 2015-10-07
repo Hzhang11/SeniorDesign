@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     fastsolver.cpp
 
 HEADERS  += debugwindow.h \
-    fastsolver.h
+    fastsolver.h \
+    constants.h
 
 FORMS    += debugwindow.ui
 
