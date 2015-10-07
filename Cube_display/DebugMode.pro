@@ -14,11 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     debugwindow.cpp \
-    solver.cpp \
-    fastsolver.cpp
 
 HEADERS  += debugwindow.h \
-    fastsolver.h \
     constants.h
 
 FORMS    += debugwindow.ui
