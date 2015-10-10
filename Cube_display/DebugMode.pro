@@ -14,10 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     debugwindow.cpp \
+    solver.cpp \
+    fastsolver.cpp \
+    modelprocessor.cpp \
+    timer.cpp
 
 HEADERS  += debugwindow.h \
+    fastsolver.h \
+    modelprocessor.h \
+    timer.h \
     constants.h
 
 FORMS    += debugwindow.ui
-
-CONFIG += console

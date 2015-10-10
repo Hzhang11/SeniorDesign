@@ -1,6 +1,5 @@
-#include "mainwindow.h"
+#include "debugwindow.h"
 #include <QApplication>
-#include "solver.cpp"
 #include <string>
 
 

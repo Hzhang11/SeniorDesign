@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QString>
+#include "constants.h"
 
 
 namespace Ui {
@@ -24,26 +25,36 @@ public:
 
 private slots:
 
-    void on_leftButton_clicked();
+    void on_generateButton_clicked();
 
-    void on_centerButton_clicked();
+    void on_scanButton_clicked();
 
-    void on_rightButton_clicked();
-
-    void on_solveButton_clicked();
+    void on_rotateButton_clicked();
 
 private:
     Ui::DebugWindow *ui;
-    QPixmap pixTop, pixLeft, pixFront;
-    QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, bottomLabelGroup;
-    void initializeLabels();
+    QPixmap pixImages[6];
+    QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
+    void initializeOnStartup();
+    void resetCubeDisplay();
     void initializeTop();
     void initializeLeft();
     void initializeFront();
     void initializeRight();
     void initializeBack();
     void initializeDown();
-    int testData[6][9];
+    void updateLabels(int cubeIn[6][9]);
+    void updateTop(int top[9]);
+    void updateLeft(int left[9]);
+    void updateFront(int front[9]);
+    void updateRight(int right[9]);
+    void updateBack(int back[9]);
+    void updateDown(int down[9]);
+    int cubeData[6][9];
+
+    // For internal testing only
+    void randomize();
+
 };
 
 #endif // DEBUGWINDOW_H
