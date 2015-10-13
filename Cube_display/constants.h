@@ -1,6 +1,7 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
+
 //0 - white
 //1 - red
 //2 - green
@@ -14,6 +15,7 @@ const int GREEN = 2, BACK = 2;
 const int YELLOW = 3, DOWN = 3;
 const int ORANGE = 4, RIGHT = 4;
 const int BLUE = 5, FRONT = 5;
+const char intToColor[] = {'w', 'r', 'g', 'y', 'o', 'b'};
 
 #endif // CONSTANTS
 

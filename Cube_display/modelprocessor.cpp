@@ -10,12 +10,18 @@
 
 ModelProcessor::ModelProcessor()
 {
-    intColor[0] = 'U';
-    intColor[1] = 'L';
-    intColor[2] = 'B';
-    intColor[3] = 'D';
-    intColor[4] = 'R';
-    intColor[5] = 'F';
+    colorToInt['w'] = 0;
+    colorToInt['r'] = 1;
+    colorToInt['g'] = 2;
+    colorToInt['y'] = 3;
+    colorToInt['o'] = 4;
+    colorToInt['b'] = 5;
+    colorToPosition['w'] = 'U';
+    colorToPosition['r'] = 'L';
+    colorToPosition['g'] = 'B';
+    colorToPosition['y'] = 'D';
+    colorToPosition['o'] = 'R';
+    colorToPosition['b'] = 'F';
 }
 
 void ModelProcessor::setCubeArray(int cubeIn[6][3][3])

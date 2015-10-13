@@ -12,8 +12,8 @@ class ModelProcessor
 
 private:
     int cube[6][9];
-    map<int, char> intColor;
-    map<char, char> colorPosition;
+    map<char, int> colorToInt;
+    map<char, char> colorToPosition;
     string cubeString, colorString;
     string colorNum2ColorStr(int colorNum);
 
