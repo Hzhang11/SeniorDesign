@@ -38,7 +38,7 @@ void DebugWindow::initializeOnStartup()
 void DebugWindow::resetCubeDisplay()
 {
     foreach (QLabel *each, topLabelGroup)
-        each->setPixmap(pixImages[TOP]);
+        each->setPixmap(pixImages[UP]);
     foreach (QLabel *each, leftLabelGroup)
         each->setPixmap(pixImages[LEFT]);
     foreach (QLabel *each, frontLabelGroup)
@@ -63,7 +63,7 @@ void DebugWindow::initializeTop()
     topLabelGroup.append(ui->cubie_top_8);
     topLabelGroup.append(ui->cubie_top_9);
     foreach (QLabel *each, topLabelGroup)
-        each->setPixmap(pixImages[TOP]);
+        each->setPixmap(pixImages[UP]);
 }
 
 void DebugWindow::initializeLeft()
@@ -163,7 +163,7 @@ void DebugWindow::on_rotateButton_clicked()
 
 void DebugWindow::updateLabels(int cubeData[6][9])
 {
-    this->updateTop(cubeData[TOP]);
+    this->updateTop(cubeData[UP]);
     this->updateLeft(cubeData[LEFT]);
     this->updateFront(cubeData[FRONT]);
     this->updateRight(cubeData[RIGHT]);
