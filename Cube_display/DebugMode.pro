@@ -13,16 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    debugwindow.cpp \
     solver.cpp \
     fastsolver.cpp \
     modelprocessor.cpp \
-    timer.cpp
+    timer.cpp \
+    mainwindow.cpp
 
-HEADERS  += debugwindow.h \
+HEADERS  += \
     fastsolver.h \
     modelprocessor.h \
     timer.h \
-    constants.h
+    constants.h \
+    mainwindow.h
 
-FORMS    += debugwindow.ui
+FORMS    += \
+    debugwindow.ui \
+    mainwindow.ui

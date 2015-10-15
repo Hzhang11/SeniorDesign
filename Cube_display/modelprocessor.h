@@ -20,16 +20,10 @@ private:
 
 public:
     ModelProcessor();
-    void setCubeArray(int cubeIn[6][3][3]);
+    void setCubeArray(int cubeIn[6][3][3], int cubeOut[6][9]);
     void setColorString(string colorIn);
     string cubeToCubeString();
     string cubeToColorString();
-    int* colorStringToCube();
-
-
-// ----------------------------
-public:
-    void setCube(int cubeIn[6][9]);
 
 };
 

@@ -1,5 +1,5 @@
-#ifndef DEBUGWINDOW_H
-#define DEBUGWINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QPixmap>
@@ -12,16 +12,16 @@
 #include "modelprocessor.h"
 
 namespace Ui {
-class DebugWindow;
+class MainWindow;
 }
 
-class DebugWindow : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit DebugWindow(QWidget *parent = 0);
-    ~DebugWindow();
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
 private slots:
 
@@ -31,8 +31,9 @@ private slots:
 
     void on_rotateButton_clicked();
 
+
 private:
-    Ui::DebugWindow *ui;
+    Ui::MainWindow *ui;
     ModelProcessor processor;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
@@ -56,6 +57,7 @@ private:
     // For internal testing only
     void randomize();
 
+
 };
 
-#endif // DEBUGWINDOW_H
+#endif // MAINWINDOW_H

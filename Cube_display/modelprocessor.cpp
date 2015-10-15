@@ -24,11 +24,14 @@ ModelProcessor::ModelProcessor()
     colorToPosition['b'] = 'F';
 }
 
-void ModelProcessor::setCubeArray(int cubeIn[6][3][3])
+
+void ModelProcessor::setCubeArray(int cubeIn[6][3][3], int cubeOut[6][9])
 {
     for (int i = 0; i < 6; i++)
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < 9; j++) {
             cube[i][j] = cubeIn[i][j/3][j%3];
+            cubeOut[i][j] = cubeIn[i][j/3][j%3];
+        }
 }
 
 
@@ -43,14 +46,12 @@ string ModelProcessor::cubeToColorString()
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 9; j++)
             tempColor += intToColor[1];
+    colorString = tempColor;
+    return tempColor;
 }
 
 string ModelProcessor::cubeToCubeString()
 {
-
+    return "Unfinished";
 }
 
-int* ModelProcessor::colorStringToCube()
-{
-
-}

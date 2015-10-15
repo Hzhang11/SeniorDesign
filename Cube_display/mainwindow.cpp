@@ -1,24 +1,23 @@
-#include "debugwindow.h"
-#include "ui_debugwindow.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <iostream>
 #include <time.h>
 
-DebugWindow::DebugWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::DebugWindow)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->initializeOnStartup();
-
 }
 
-DebugWindow::~DebugWindow()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
 
-void DebugWindow::initializeOnStartup()
+void MainWindow::initializeOnStartup()
 {
     pixImages[RED].load("red.png");
     pixImages[WHITE].load("white.png");
@@ -34,7 +33,8 @@ void DebugWindow::initializeOnStartup()
     this->initializeRight();
 }
 
-void DebugWindow::resetCubeDisplay()
+
+void MainWindow::resetCubeDisplay()
 {
     foreach (QLabel *each, topLabelGroup)
         each->setPixmap(pixImages[UP]);
@@ -50,7 +50,9 @@ void DebugWindow::resetCubeDisplay()
         each->setPixmap(pixImages[DOWN]);
 }
 
-void DebugWindow::initializeTop()
+
+
+void MainWindow::initializeTop()
 {
     topLabelGroup.append(ui->cubie_top_1);
     topLabelGroup.append(ui->cubie_top_2);
@@ -65,7 +67,7 @@ void DebugWindow::initializeTop()
         each->setPixmap(pixImages[UP]);
 }
 
-void DebugWindow::initializeLeft()
+void MainWindow::initializeLeft()
 {
     leftLabelGroup.append(ui->cubie_left_1);
     leftLabelGroup.append(ui->cubie_left_2);
@@ -80,7 +82,7 @@ void DebugWindow::initializeLeft()
         each->setPixmap(pixImages[LEFT]);
 }
 
-void DebugWindow::initializeFront()
+void MainWindow::initializeFront()
 {
     frontLabelGroup.append(ui->cubie_front_1);
     frontLabelGroup.append(ui->cubie_front_2);
@@ -95,7 +97,7 @@ void DebugWindow::initializeFront()
         each->setPixmap(pixImages[FRONT]);
 }
 
-void DebugWindow::initializeRight()
+void MainWindow::initializeRight()
 {
     rightLabelGroup.append(ui->cubie_right_1);
     rightLabelGroup.append(ui->cubie_right_2);
@@ -111,7 +113,7 @@ void DebugWindow::initializeRight()
 
 }
 
-void DebugWindow::initializeBack()
+void MainWindow::initializeBack()
 {
     backLabelGroup.append(ui->cubie_back_1);
     backLabelGroup.append(ui->cubie_back_2);
@@ -126,7 +128,7 @@ void DebugWindow::initializeBack()
         each->setPixmap(pixImages[BACK]);
 }
 
-void DebugWindow::initializeDown()
+void MainWindow::initializeDown()
 {
     downLabelGroup.append(ui->cubie_down_1);
     downLabelGroup.append(ui->cubie_down_2);
@@ -142,25 +144,25 @@ void DebugWindow::initializeDown()
 }
 
 
-void DebugWindow::on_scanButton_clicked()
+void MainWindow::on_scanButton_clicked()
 {
     qDebug("Scan Button Clicked, reset to default");
     this->resetCubeDisplay();
 }
 
-void DebugWindow::on_generateButton_clicked()
+void MainWindow::on_generateButton_clicked()
 {
     qDebug("Generate Solution Button Clicked, try to get original stuff");
     QString str = ui->textEdit->toPlainText();
 }
 
-void DebugWindow::on_rotateButton_clicked()
+void MainWindow::on_rotateButton_clicked()
 {
     qDebug("Rotate Button Clicked, set to random");
     this->randomize();
 }
 
-void DebugWindow::updateLabels(int cubeData[6][9])
+void MainWindow::updateLabels(int cubeData[6][9])
 {
     this->updateTop(cubeData[UP]);
     this->updateLeft(cubeData[LEFT]);
@@ -170,42 +172,42 @@ void DebugWindow::updateLabels(int cubeData[6][9])
     this->updateDown(cubeData[DOWN]);
 }
 
-void DebugWindow::updateTop(int input[])
+void MainWindow::updateTop(int input[])
 {
     int i = 0;
     foreach (QLabel *each, topLabelGroup)
         each->setPixmap(pixImages[input[i++]]);
 }
 
-void DebugWindow::updateLeft(int input[])
+void MainWindow::updateLeft(int input[])
 {
     int i = 0;
     foreach (QLabel *each, leftLabelGroup)
         each->setPixmap(pixImages[input[i++]]);
 }
 
-void DebugWindow::updateFront(int input[])
+void MainWindow::updateFront(int input[])
 {
     int i = 0;
     foreach (QLabel *each, frontLabelGroup)
         each->setPixmap(pixImages[input[i++]]);
 }
 
-void DebugWindow::updateRight(int input[])
+void MainWindow::updateRight(int input[])
 {
     int i = 0;
     foreach (QLabel *each, rightLabelGroup)
         each->setPixmap(pixImages[input[i++]]);
 }
 
-void DebugWindow::updateBack(int input[])
+void MainWindow::updateBack(int input[])
 {
     int i = 0;
     foreach (QLabel *each, backLabelGroup)
         each->setPixmap(pixImages[input[i++]]);
 }
 
-void DebugWindow::updateDown(int input[])
+void MainWindow::updateDown(int input[])
 {
     int i = 0;
     foreach (QLabel *each, downLabelGroup)
@@ -213,7 +215,7 @@ void DebugWindow::updateDown(int input[])
 }
 
 // For internal testing only
-void DebugWindow::randomize()
+void MainWindow::randomize()
 {
     srand (time(NULL));
     int cubeData[6][3][3];
