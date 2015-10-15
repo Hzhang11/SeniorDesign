@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include "constants.h"
 
 
 using namespace std;
@@ -26,7 +27,9 @@ public:
     int* colorStringToCube();
 
 
-
+// ----------------------------
+public:
+    void setCube(int cubeIn[6][9]);
 
 };
 

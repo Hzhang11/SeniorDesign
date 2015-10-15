@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QString>
 #include "constants.h"
-
+#include "modelprocessor.h"
 
 namespace Ui {
 class DebugWindow;
@@ -33,6 +33,7 @@ private slots:
 
 private:
     Ui::DebugWindow *ui;
+    ModelProcessor psr;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
     void initializeOnStartup();

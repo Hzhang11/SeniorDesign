@@ -42,7 +42,7 @@ string ModelProcessor::cubeToColorString()
     string tempColor;
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 9; j++)
-            tempColor += intColor[];
+            tempColor += intToColor[1];
 }
 
 string ModelProcessor::cubeToCubeString()
