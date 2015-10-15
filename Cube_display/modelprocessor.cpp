@@ -42,16 +42,21 @@ void ModelProcessor::setColorString(string colorIn)
 
 string ModelProcessor::cubeToColorString()
 {
-    string tempColor;
-    for (int i = 0; i < 6; i++)
-        for (int j = 0; j < 9; j++)
-            tempColor += intToColor[1];
-    colorString = tempColor;
-    return tempColor;
+    string resultStr;
+    int face;
+    for(int i = 0; i < 6; i++) {
+        face = faceOrder[i];
+        for(int j = 0; j < 9; j++)
+            resultStr += intToColor[cube[face][j]];
+    }
+    colorString = resultStr;
+    return resultStr;
 }
 
 string ModelProcessor::cubeToCubeString()
 {
+    string resultStr;
+    this->cubeToColorString();
     return "Unfinished";
 }
 

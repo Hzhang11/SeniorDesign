@@ -16,15 +16,15 @@ SOURCES += main.cpp\
     solver.cpp \
     fastsolver.cpp \
     modelprocessor.cpp \
-    timer.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mytimer.cpp
 
 HEADERS  += \
     fastsolver.h \
     modelprocessor.h \
-    timer.h \
     constants.h \
-    mainwindow.h
+    mainwindow.h \
+    mytimer.h
 
 FORMS    += \
     debugwindow.ui \

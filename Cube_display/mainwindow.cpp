@@ -9,11 +9,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->initializeOnStartup();
+    connect(&tmr, SIGNAL(timeChanged()), this, SLOT(updateTimeLabel()));
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::updateTimeLabel()
+{
+    int elapsed = tmr.getElapsedTime();
+    ui->solutionLabel->setText(QString::number(elapsed));
 }
 
 
@@ -146,14 +154,16 @@ void MainWindow::initializeDown()
 
 void MainWindow::on_scanButton_clicked()
 {
-    qDebug("Scan Button Clicked, reset to default");
+    qDebug("Scan Button Clicked, reset to default, start the timer");
+    tmr.start();
     this->resetCubeDisplay();
 }
 
 void MainWindow::on_generateButton_clicked()
 {
-    qDebug("Generate Solution Button Clicked, try to get original stuff");
-    QString str = ui->textEdit->toPlainText();
+    qDebug("Generate Solution Button Clicked, try to get original stuff, end the timer");
+    //QString str = ui->textEdit->toPlainText();
+    tmr.end();
 }
 
 void MainWindow::on_rotateButton_clicked()
@@ -224,7 +234,9 @@ void MainWindow::randomize()
             for(int k = 0; k < 3; k++)
             cubeData[i][j][k] = rand()%6;
     processor.setCubeArray(cubeData, cube);
-
+    string cubeStr = processor.cubeToColorString();
     this->updateLabels(cube);
+   // string cubeStr = processor.cubeToColorString();
+ //   string pause;
 
 }

@@ -10,6 +10,8 @@
 #include <QString>
 #include "constants.h"
 #include "modelprocessor.h"
+#include "mytimer.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -31,10 +33,13 @@ private slots:
 
     void on_rotateButton_clicked();
 
+    void updateTimeLabel();
+
 
 private:
     Ui::MainWindow *ui;
     ModelProcessor processor;
+    MyTimer tmr;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
     void initializeOnStartup();
