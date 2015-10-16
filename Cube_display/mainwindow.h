@@ -11,7 +11,7 @@
 #include "constants.h"
 #include "modelprocessor.h"
 #include "mytimer.h"
-
+#include <QFont>
 
 namespace Ui {
 class MainWindow;
@@ -25,15 +25,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
-
     void on_generateButton_clicked();
-
     void on_scanButton_clicked();
-
     void on_rotateButton_clicked();
-
-    void updateTimeLabel();
 
 
 private:

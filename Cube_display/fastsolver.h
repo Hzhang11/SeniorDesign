@@ -24,7 +24,7 @@ public:
     vi applyMove ( int move, vi state );
     int inverse ( int move );
     vi id ( vi state );
-    void solve (char *cubeInput );
+    string solve(vector<string> cubeInput );
 
 public:
 

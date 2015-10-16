@@ -74,8 +74,9 @@ vi FastSolver::id ( vi state ) {
 }
 
 
-void FastSolver::solve (char* input) {
+string FastSolver::solve (vector<string> cubeInput) {
 
+    string solutions ("");
 
 
   //--- Define the goal.
@@ -90,7 +91,7 @@ void FastSolver::solve (char* input) {
     goalState[i] = i;
 
     //--- Current (start) state.
-    string cubie = input;
+    string cubie = cubeInput[i];
     while( (currentState[i] = find( goal, goal+20, cubie ) - goal) == 20){
       cubie = cubie.substr( 1 ) + cubie[0];
       currentState[i+20]++;
@@ -158,6 +159,8 @@ void FastSolver::solve (char* input) {
         //--- Print and apply the algorithm.
         for( int i=0; i<(int)algorithm.size(); i++ ){
           cout << "UDFBLR"[algorithm[i]/3] << algorithm[i]%3+1;
+          solutions += "UDFBLR"[algorithm[i]/3];
+          solutions += to_string(algorithm[i]%3+1);
           currentState = applyMove( algorithm[i], currentState );
         }
 
@@ -178,4 +181,5 @@ void FastSolver::solve (char* input) {
   nextPhasePlease:
     ;
   }
+  return solutions;
 }

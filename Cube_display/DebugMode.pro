@@ -27,5 +27,6 @@ HEADERS  += \
     mytimer.h
 
 FORMS    += \
-    debugwindow.ui \
     mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++0x

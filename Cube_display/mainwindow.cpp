@@ -9,19 +9,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->initializeOnStartup();
-    connect(&tmr, SIGNAL(timeChanged()), this, SLOT(updateTimeLabel()));
-
+    ui->timerLabel->setFont(timerFont);
+    tmr.setLabel(ui->timerLabel);
 }
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::updateTimeLabel()
-{
-    int elapsed = tmr.getElapsedTime();
-    ui->solutionLabel->setText(QString::number(elapsed));
 }
 
 
@@ -236,7 +231,4 @@ void MainWindow::randomize()
     processor.setCubeArray(cubeData, cube);
     string cubeStr = processor.cubeToColorString();
     this->updateLabels(cube);
-   // string cubeStr = processor.cubeToColorString();
- //   string pause;
-
 }
