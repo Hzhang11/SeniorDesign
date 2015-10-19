@@ -229,6 +229,17 @@ void MainWindow::randomize()
             for(int k = 0; k < 3; k++)
             cubeData[i][j][k] = rand()%6;
     processor.setCubeArray(cubeData, cube);
-    string cubeStr = processor.cubeToColorString();
     this->updateLabels(cube);
+    string colorStr = processor.cubeToColorString();
+    vector<string> positionStr = processor.colorToCubeString();
+    QString posStr, clcStr;
+    for (int i = 0; i < positionStr.size(); ++i)
+    {
+        if (i > 0)
+            posStr += " ";
+        posStr += QString::fromStdString(positionStr[i]);
+    }
+    clcStr = QString::fromStdString(colorStr);
+    ui->positionText->setText(posStr);
+    ui->colorText->setText(clcStr);
 }

@@ -434,13 +434,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="positionText">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>350</y>
-      <width>181</width>
-      <height>78</height>
+      <x>360</x>
+      <y>330</y>
+      <width>391</width>
+      <height>71</height>
      </rect>
     </property>
    </widget>
@@ -1119,19 +1119,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="solutionLabel">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>450</y>
-      <width>301</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Solution Label</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
@@ -1342,12 +1329,12 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>410</x>
       <y>40</y>
-      <width>198</width>
+      <width>281</width>
       <height>52</height>
      </rect>
     </property>
@@ -1355,18 +1342,28 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:28pt; font-weight:600;&quot;&gt;Timer:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:28pt; font-weight:600;&quot;&gt;Timer: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="timerLabel">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:28pt; font-weight:600;&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:28pt; font-weight:600;&quot;&gt;    0.00 &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QTextEdit" name="colorText">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>410</y>
+      <width>391</width>
+      <height>75</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
