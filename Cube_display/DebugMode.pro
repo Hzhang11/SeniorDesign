@@ -17,14 +17,16 @@ SOURCES += main.cpp\
     fastsolver.cpp \
     modelprocessor.cpp \
     mainwindow.cpp \
-    mytimer.cpp
+    mytimer.cpp \
+    appinterface.cpp
 
 HEADERS  += \
     fastsolver.h \
     modelprocessor.h \
     constants.h \
     mainwindow.h \
-    mytimer.h
+    mytimer.h \
+    appinterface.h
 
 FORMS    += \
     mainwindow.ui

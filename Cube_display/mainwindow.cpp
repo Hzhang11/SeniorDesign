@@ -240,6 +240,7 @@ void MainWindow::randomize()
         posStr += QString::fromStdString(positionStr[i]);
     }
     clcStr = QString::fromStdString(colorStr);
+   // solver.solve();
     ui->positionText->setText(posStr);
     ui->colorText->setText(clcStr);
 }

@@ -11,6 +11,7 @@
 #include "constants.h"
 #include "modelprocessor.h"
 #include "mytimer.h"
+#include "fastsolver.h"
 #include <QFont>
 
 namespace Ui {
@@ -35,6 +36,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ModelProcessor processor;
+    FastSolver solver;
     MyTimer tmr;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
