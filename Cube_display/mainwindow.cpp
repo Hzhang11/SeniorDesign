@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->initializeOnStartup();
     ui->timerLabel->setFont(timerFont);
-    tmr.setLabel(ui->timerLabel);
+    application.setTimerLabel(ui->timerLabel);
 }
 
 
@@ -150,7 +150,7 @@ void MainWindow::initializeDown()
 void MainWindow::on_scanButton_clicked()
 {
     qDebug("Scan Button Clicked, reset to default, start the timer");
-    tmr.start();
+    application.startTimer();
     this->resetCubeDisplay();
 }
 
@@ -158,7 +158,8 @@ void MainWindow::on_generateButton_clicked()
 {
     qDebug("Generate Solution Button Clicked, try to get original stuff, end the timer");
     //QString str = ui->textEdit->toPlainText();
-    tmr.end();
+    ui->positionText->clear();
+    application.endTimer();
 }
 
 void MainWindow::on_rotateButton_clicked()
@@ -228,11 +229,11 @@ void MainWindow::randomize()
         for(int j = 0; j < 3; j++)
             for(int k = 0; k < 3; k++)
             cubeData[i][j][k] = rand()%6;
-    processor.setCubeArray(cubeData, cube);
+    application.setModel(cubeData, cube);
     this->updateLabels(cube);
-    string colorStr = processor.cubeToColorString();
-    vector<string> positionStr = processor.colorToCubeString();
-    QString posStr, clcStr;
+    string colorStr = application.getColorString();
+    vector<string> positionStr = application.getCubeStringVector();
+    QString posStr, clcStr, solutionStr;
     for (int i = 0; i < positionStr.size(); ++i)
     {
         if (i > 0)
@@ -240,7 +241,9 @@ void MainWindow::randomize()
         posStr += QString::fromStdString(positionStr[i]);
     }
     clcStr = QString::fromStdString(colorStr);
-   // solver.solve();
-    ui->positionText->setText(posStr);
+    string scannedInput[] = {"RU","LF","RD","RF","FU","UL","BD","DF","RB","LB","BU","LD","LBD","URB","LUB","DRF","ULF","FLD","RDB","UFR"};
+    string out = application.solve(scannedInput);
+    solutionStr = QString::fromStdString(out);
+    ui->positionText->setText(solutionStr);
     ui->colorText->setText(clcStr);
 }

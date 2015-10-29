@@ -1,19 +1,9 @@
 #include "fastsolver.h"
 
 
-
-
 FastSolver::FastSolver()
 {    
-    int affectedCubies[][8] = {
-            {  0,  1,  2,  3,  0,  1,  2,  3 },   // U
-            {  4,  7,  6,  5,  4,  5,  6,  7 },   // D
-            {  0,  9,  4,  8,  0,  3,  5,  4 },   // F
-            {  2, 10,  6, 11,  2,  1,  7,  6 },   // B
-            {  3, 11,  7,  9,  3,  2,  6,  5 },   // L
-            {  1,  8,  5, 10,  1,  0,  4,  7 },   // R
-    };
-    int applicableMoves[] = { 0, 262143, 259263, 74943, 74898 };
+
 }
 
 
@@ -36,6 +26,7 @@ vi FastSolver::applyMove ( int move, vi state ) {
   }
   return state;
 }
+
 
 int FastSolver::inverse ( int move ) {
   return move + 2 - 2 * (move % 3);
@@ -74,11 +65,11 @@ vi FastSolver::id ( vi state ) {
 }
 
 
-string FastSolver::solve (vector<string> cubeInput) {
+string FastSolver::solve (string cubeInput[]) {
 
     string solutions ("");
 
-
+    phase = 0;
   //--- Define the goal.
   string goal[] = { "UF", "UR", "UB", "UL", "DF", "DR", "DB", "DL", "FR", "FL", "BR", "BL",
             "UFR", "URB", "UBL", "ULF", "DRF", "DFL", "DLB", "DBR" };
