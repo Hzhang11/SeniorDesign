@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Initialize cube display on startup
     this->initializeOnStartup();
     ui->timerLabel->setFont(timerFont);
     application.setTimerLabel(ui->timerLabel);
@@ -19,7 +20,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+// Initialize initial cube display
 void MainWindow::initializeOnStartup()
 {
     pixImages[RED].load("red.png");
@@ -36,7 +37,7 @@ void MainWindow::initializeOnStartup()
     this->initializeRight();
 }
 
-
+// Reset cube display
 void MainWindow::resetCubeDisplay()
 {
     foreach (QLabel *each, topLabelGroup)
@@ -54,7 +55,7 @@ void MainWindow::resetCubeDisplay()
 }
 
 
-
+// Initialize top face
 void MainWindow::initializeTop()
 {
     topLabelGroup.append(ui->cubie_top_1);
@@ -70,6 +71,7 @@ void MainWindow::initializeTop()
         each->setPixmap(pixImages[UP]);
 }
 
+// Initialize left face
 void MainWindow::initializeLeft()
 {
     leftLabelGroup.append(ui->cubie_left_1);
@@ -85,6 +87,7 @@ void MainWindow::initializeLeft()
         each->setPixmap(pixImages[LEFT]);
 }
 
+// Initialize front face
 void MainWindow::initializeFront()
 {
     frontLabelGroup.append(ui->cubie_front_1);
@@ -100,6 +103,7 @@ void MainWindow::initializeFront()
         each->setPixmap(pixImages[FRONT]);
 }
 
+// Initialize right face
 void MainWindow::initializeRight()
 {
     rightLabelGroup.append(ui->cubie_right_1);
@@ -116,6 +120,7 @@ void MainWindow::initializeRight()
 
 }
 
+// Initialize back face
 void MainWindow::initializeBack()
 {
     backLabelGroup.append(ui->cubie_back_1);
@@ -131,6 +136,7 @@ void MainWindow::initializeBack()
         each->setPixmap(pixImages[BACK]);
 }
 
+// Initialize bottom face
 void MainWindow::initializeDown()
 {
     downLabelGroup.append(ui->cubie_down_1);
@@ -146,7 +152,7 @@ void MainWindow::initializeDown()
         each->setPixmap(pixImages[DOWN]);
 }
 
-
+// Scan button click, start the timer, and reset the cube display
 void MainWindow::on_scanButton_clicked()
 {
     qDebug("Scan Button Clicked, reset to default, start the timer");
@@ -154,20 +160,23 @@ void MainWindow::on_scanButton_clicked()
     this->resetCubeDisplay();
 }
 
+// Generate button click, clear position string text area, and end the timer
 void MainWindow::on_generateButton_clicked()
 {
-    qDebug("Generate Solution Button Clicked, try to get original stuff, end the timer");
+    qDebug("Generate Solution Button Clicked, end the timer");
     //QString str = ui->textEdit->toPlainText();
     ui->positionText->clear();
     application.endTimer();
 }
 
+// Rotate button click, randomize the cube, and solve a preset cube with solution printed to position string text area
 void MainWindow::on_rotateButton_clicked()
 {
     qDebug("Rotate Button Clicked, set to random");
     this->randomize();
 }
 
+// Update labels on all faces
 void MainWindow::updateLabels(int cubeData[6][9])
 {
     this->updateTop(cubeData[UP]);
@@ -178,6 +187,7 @@ void MainWindow::updateLabels(int cubeData[6][9])
     this->updateDown(cubeData[DOWN]);
 }
 
+// Update top face
 void MainWindow::updateTop(int input[])
 {
     int i = 0;
@@ -185,6 +195,7 @@ void MainWindow::updateTop(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
+// Update left face
 void MainWindow::updateLeft(int input[])
 {
     int i = 0;
@@ -192,6 +203,7 @@ void MainWindow::updateLeft(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
+// Update front face
 void MainWindow::updateFront(int input[])
 {
     int i = 0;
@@ -199,6 +211,7 @@ void MainWindow::updateFront(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
+// Update right face
 void MainWindow::updateRight(int input[])
 {
     int i = 0;
@@ -206,6 +219,7 @@ void MainWindow::updateRight(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
+// Update back face
 void MainWindow::updateBack(int input[])
 {
     int i = 0;
@@ -213,6 +227,7 @@ void MainWindow::updateBack(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
+// Update bottom face
 void MainWindow::updateDown(int input[])
 {
     int i = 0;
@@ -224,26 +239,35 @@ void MainWindow::updateDown(int input[])
 void MainWindow::randomize()
 {
     srand (time(NULL));
+    QString posStr, clcStr, solutionStr;
     int cubeData[6][3][3];
+    // Randomize the cube
     for(int i = 0; i < 6; i++)
         for(int j = 0; j < 3; j++)
             for(int k = 0; k < 3; k++)
             cubeData[i][j][k] = rand()%6;
+    // Convert cube model from 3D array to 2D array, cubeData is the input, cube is the output
     application.setModel(cubeData, cube);
+    // Update labels based on cube model
     this->updateLabels(cube);
+    // Get and display the color string corresponding to cube model
     string colorStr = application.getColorString();
+    clcStr = QString::fromStdString(colorStr);
+    ui->colorText->setText(clcStr);
+
+    // Get the position string of the current cube model (most likely invalid), and convert to QString
     vector<string> positionStr = application.getCubeStringVector();
-    QString posStr, clcStr, solutionStr;
     for (int i = 0; i < positionStr.size(); ++i)
     {
         if (i > 0)
             posStr += " ";
         posStr += QString::fromStdString(positionStr[i]);
     }
-    clcStr = QString::fromStdString(colorStr);
+    // Preset cube model for solver
     string scannedInput[] = {"RU","LF","RD","RF","FU","UL","BD","DF","RB","LB","BU","LD","LBD","URB","LUB","DRF","ULF","FLD","RDB","UFR"};
+    // Solve the preset model and get solution string
     string out = application.solve(scannedInput);
     solutionStr = QString::fromStdString(out);
+    // Display the solution
     ui->positionText->setText(solutionStr);
-    ui->colorText->setText(clcStr);
 }
