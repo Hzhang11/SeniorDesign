@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        dialog.cpp
+        dialog.cpp \
+    motoropinterface.cpp
 
-HEADERS  += dialog.h
+HEADERS  += dialog.h \
+    motoropinterface.h
 
 FORMS    += dialog.ui

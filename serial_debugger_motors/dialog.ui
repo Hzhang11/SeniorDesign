@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>310</width>
-    <height>291</height>
+    <width>608</width>
+    <height>273</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -142,7 +142,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>210</y>
+     <y>200</y>
      <width>291</width>
      <height>21</height>
     </rect>
@@ -155,9 +155,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>180</y>
+     <y>179</y>
      <width>66</width>
-     <height>29</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -168,23 +168,62 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>220</y>
      <width>66</width>
-     <height>29</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>Received</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="lineEditReceived">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>260</y>
+     <y>240</y>
      <width>291</width>
      <height>21</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonInterSolution">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>10</y>
+     <width>291</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Interpret Solution</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>40</y>
+     <width>66</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Solution</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditSolution">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>60</y>
+     <width>291</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

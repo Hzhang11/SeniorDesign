@@ -2,7 +2,10 @@
 #define DIALOG_H
 
 #include <QDialog>
-#include <QSerialPort>
+#include <QDebug>
+#include <QtWidgets>
+#include <QObject>
+#include "motoropinterface.h"
 
 namespace Ui {
 class Dialog;
@@ -18,28 +21,18 @@ public:
 
 private slots:
     void on_pushButtonStepImm_clicked();
-    void sendPacket(QByteArray payload);
-    void displayPacket(QByteArray command);
-    void readSerial();
-    QByteArray buildPacket(char mode);
     void on_pushButtonStepDefer_clicked();
-
     void on_pushButtonExeDef_clicked();
+    void displayRead(QString in);
+    void on_pushButtonInterSolution_clicked();
 
 private:
     Ui::Dialog *ui;
 
-    // set variables to indentify serial port used to access teensy device
-    QSerialPort *teensyPort;
-    static const quint16 teensy_vendID = 5824;
-    static const quint16 teensy_prodID = 1155;
-    QString teensy_portName;
-    bool teensy_isAvaiable;
-
-    QString feedbackBuffer = "";
-
-    static const int stepperPayloadSize = 11;
-    static const int packetWrapperSize = 4;
+    MotorOpInterface* motorOps;
+    // functions
+    QList<int> fetchMotorControlArgs();
+    QString QByteArrayToString(QByteArray inArray);
 };
 
 #endif // DIALOG_H
