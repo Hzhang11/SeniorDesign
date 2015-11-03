@@ -13,13 +13,14 @@ MotorOpInterface::MotorOpInterface(QObject *parent) : QObject(parent)
     // if so, check if vendor/product indentifiers match with the pre-specified teensy device
     // & report that the device is present
     foreach(const QSerialPortInfo &thisSerialPort, QSerialPortInfo::availablePorts()) {
-        if(thisSerialPort.hasVendorIdentifier() && thisSerialPort.hasProductIdentifier())
-            qDebug() << "ven id" << thisSerialPort.vendorIdentifier();
-            qDebug() << "pro id" << thisSerialPort.productIdentifier();
+        if(thisSerialPort.hasVendorIdentifier() && thisSerialPort.hasProductIdentifier()) {
+            qDebug() << "ven id:" << thisSerialPort.vendorIdentifier() << "- pro id:" << thisSerialPort.productIdentifier();;
             if(thisSerialPort.vendorIdentifier() == teensy_vendID && thisSerialPort.productIdentifier() == teensy_prodID) {
+                qDebug() << "Teensy device found";
                 teensy_portName = thisSerialPort.portName();
                 teensy_isAvaiable = true;
             }
+        }
     }
 
     // attempt to open communications to teensy serial port
@@ -103,7 +104,6 @@ QByteArray MotorOpInterface::buildPacket(char mode, QList<int> motorControlArgs)
         checksum ^= packet[i];
     }
     packet.append(checksum);
-
     return packet;
 }
 
@@ -129,7 +129,7 @@ QList<QByteArray> MotorOpInterface::interpretSolution(QString solution) {
                 qDebug() << i << ":" << solution[i] << "-" << i+2 << ":" << solution[i+2];
                 i += 2; // adjust index to skip next already issued step due to opposite side detection
             }
-            else {
+            else { //
                 motorControlArgs = buildMotorArgs(solution[i].toLatin1(), solution[i+1].digitValue());
                 motorCmdList.append(buildPacket('I', motorControlArgs));
             }
@@ -139,10 +139,6 @@ QList<QByteArray> MotorOpInterface::interpretSolution(QString solution) {
             motorCmdList.append(buildPacket('I', motorControlArgs));
         }
     }
-
-    qDebug() << motorCmdList;
-
-
     return motorCmdList;
 }
 
