@@ -42,9 +42,10 @@ void ModelProcessor::setColorString(string colorIn, int cubeOut[6][9])
 {
     char colorChar;
     colorString = colorIn;
-    for (int i = 0; i < 6; i++)
+    int k = 0;
+    for(int i: faceOrder)
         for (int j = 0; j < 9; j++) {
-            colorChar = colorString[i*9+j];
+            colorChar = colorString[k++];
             cube[i][j] = colorToInt[colorChar];
             cubeOut[i][j] = colorToInt[colorChar];
         }

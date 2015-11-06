@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    motorOps.closeConnection();
 }
 
 // Initialize initial cube display
@@ -272,6 +273,10 @@ void MainWindow::randomize()
     ui->positionText->setText(solutionStr);
 }
 
+// Test function for manual input cube data
+// Input cube using color string, in the order of: TOP, LEFT, FRONT, RIGHT, BACK, DOWN
+// Each face should be input from left to right, top to bottom, and maintain orientation of the cube
+
 void MainWindow::test()
 {
     QString posStr;
@@ -287,10 +292,18 @@ void MainWindow::test()
         posStr += QString::fromStdString(positionStr[i]);
     }
     ui->positionText->setText(posStr);
+    this->updateLabels(cubeModel);
+
+    // Solve and interpret solutions
+    // And send packets
+//    string inputStr[] = {"BL", "UF UR UB DB DF DB FL FR UL BR DL", "BLU", "UFR", "URB", "FDR", "LDF", "FUL", "DBR", "BDL"};
+
     string solution = application.solve(positionStr);
+    string hello = "";
+    /*
     QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(solution));
     for(int i = 0; i < motorCmdList.size(); i++) {
-        motorOps->sendPacket(motorCmdList[i]);
-    }
+        motorOps.sendPacket(motorCmdList[i]);
+    }*/
     //  qDebug << stdColor;
 }

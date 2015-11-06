@@ -437,9 +437,9 @@
    <widget class="QTextEdit" name="positionText">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>430</x>
       <y>330</y>
-      <width>391</width>
+      <width>331</width>
       <height>71</height>
      </rect>
     </property>
@@ -1358,11 +1358,37 @@
    <widget class="QTextEdit" name="colorText">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>430</x>
       <y>410</y>
-      <width>391</width>
+      <width>331</width>
       <height>75</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>430</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Color Input</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>360</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Output</string>
     </property>
    </widget>
   </widget>
