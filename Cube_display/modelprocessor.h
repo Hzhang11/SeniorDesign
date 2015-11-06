@@ -22,10 +22,9 @@ private:
 public:
     ModelProcessor();
     void setCubeArray(int cubeIn[6][3][3], int cubeOut[6][9]);
-    void setColorString(string colorIn);
-    vector<string> cubeToCubeString();
-    string cubeToColorString();
-    vector<string> colorToCubeString();
+    void setColorString(string colorIn, int cubeOut[6][9]);
+    vector<string> getCubeString();
+    string getColorString();
 
 };
 

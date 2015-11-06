@@ -22,13 +22,12 @@ public:
     void endTimer();
     string solve(vector<string> input);
     string solve(string input[20]);
-    void setModel(string colorString);
+    void setModel(string colorString, int cubeOutput[6][9]);
     void setModel(int cubeInput[6][3][3], int cubeOutput[6][9]);
     string getColorString();
     vector<string> getCubeStringVector();
 
 private:
-    //int cubeArray[6][9];
     MyTimer timer;
     ModelProcessor processor;
     FastSolver solver;

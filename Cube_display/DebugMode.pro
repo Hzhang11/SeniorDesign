@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     modelprocessor.cpp \
     mainwindow.cpp \
     mytimer.cpp \
-    appinterface.cpp
+    appinterface.cpp \
+    motorinterface.cpp
 
 HEADERS  += \
     fastsolver.h \
@@ -26,7 +27,8 @@ HEADERS  += \
     constants.h \
     mainwindow.h \
     mytimer.h \
-    appinterface.h
+    appinterface.h \
+    motorinterface.h
 
 FORMS    += \
     mainwindow.ui

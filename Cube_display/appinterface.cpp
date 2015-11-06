@@ -44,18 +44,18 @@ void AppInterface::setModel(int cubeInput[6][3][3], int cubeOutput[6][9])
     processor.setCubeArray(cubeInput, cubeOutput);
 }
 
-void AppInterface::setModel(string colorString)
+void AppInterface::setModel(string colorString, int cubeOutput[6][9])
 {
-    processor.setColorString(colorString);
+    processor.setColorString(colorString, cubeOutput);
 }
 
 string AppInterface::getColorString()
 {
-    return processor.cubeToColorString();
+    return processor.getColorString();
 }
 
 vector<string> AppInterface::getCubeStringVector()
 {
-    return processor.cubeToCubeString();
+    return processor.getCubeString();
 }
 

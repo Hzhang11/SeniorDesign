@@ -10,6 +10,7 @@
 #include <QString>
 #include "constants.h"
 #include "appinterface.h"
+#include "motorinterface.h"
 #include <QFont>
 
 namespace Ui {
@@ -34,6 +35,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     AppInterface application;
+    MotorOpInterface motorOps;
 
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
@@ -52,9 +54,11 @@ private:
     void updateRight(int right[9]);
     void updateBack(int back[9]);
     void updateDown(int down[9]);
-    int cube[6][9];
+    // Cube model used to store cube data
+    int cubeModel[6][9];
 
     // For internal testing only
+    void test();
     void randomize();
 
 

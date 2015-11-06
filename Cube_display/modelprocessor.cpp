@@ -32,27 +32,32 @@ void ModelProcessor::setCubeArray(int cubeIn[6][3][3], int cubeOut[6][9])
             cube[i][j] = cubeIn[i][j/3][j%3];
             cubeOut[i][j] = cubeIn[i][j/3][j%3];
         }
+    for(int face: faceOrder)
+        for(int j = 0; j < 9; j++)
+            colorString += intToColor[cube[face][j]];
 }
 
 // Set color string
-void ModelProcessor::setColorString(string colorIn)
+void ModelProcessor::setColorString(string colorIn, int cubeOut[6][9])
 {
+    char colorChar;
     colorString = colorIn;
+    for (int i = 0; i < 6; i++)
+        for (int j = 0; j < 9; j++) {
+            colorChar = colorString[i*9+j];
+            cube[i][j] = colorToInt[colorChar];
+            cubeOut[i][j] = colorToInt[colorChar];
+        }
 }
 
-// Convert cube array to color string
-string ModelProcessor::cubeToColorString()
+// Get color string
+string ModelProcessor::getColorString()
 {
-    string resultStr;
-    for(int face: faceOrder)
-        for(int j = 0; j < 9; j++)
-            resultStr += intToColor[cube[face][j]];
-    colorString = resultStr;
-    return resultStr;
+    return colorString;
 }
 
 // Convert color string to cube string
-vector<string> ModelProcessor::colorToCubeString()
+vector<string> ModelProcessor::getCubeString()
 {
     int edge1Index, edge2Index, corner1Index, corner2Index, corner3Index;
 
@@ -80,14 +85,5 @@ vector<string> ModelProcessor::colorToCubeString()
     positionString = posString;
     return positionString;
 
-}
-
-// Convert cube array to cube string
-vector<string> ModelProcessor::cubeToCubeString()
-{
-    vector<string> resultStr;
-    this->cubeToColorString();
-    resultStr = this->colorToCubeString();
-    return resultStr;
 }
 

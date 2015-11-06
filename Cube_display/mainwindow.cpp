@@ -165,7 +165,7 @@ void MainWindow::on_generateButton_clicked()
 {
     qDebug("Generate Solution Button Clicked, end the timer");
     //QString str = ui->textEdit->toPlainText();
-    ui->positionText->clear();
+    ui->colorText->clear();
     application.endTimer();
 }
 
@@ -173,7 +173,7 @@ void MainWindow::on_generateButton_clicked()
 void MainWindow::on_rotateButton_clicked()
 {
     qDebug("Rotate Button Clicked, set to random");
-    this->randomize();
+    this->test();
 }
 
 // Update labels on all faces
@@ -247,9 +247,9 @@ void MainWindow::randomize()
             for(int k = 0; k < 3; k++)
             cubeData[i][j][k] = rand()%6;
     // Convert cube model from 3D array to 2D array, cubeData is the input, cube is the output
-    application.setModel(cubeData, cube);
+    application.setModel(cubeData, cubeModel);
     // Update labels based on cube model
-    this->updateLabels(cube);
+    this->updateLabels(cubeModel);
     // Get and display the color string corresponding to cube model
     string colorStr = application.getColorString();
     clcStr = QString::fromStdString(colorStr);
@@ -270,4 +270,27 @@ void MainWindow::randomize()
     solutionStr = QString::fromStdString(out);
     // Display the solution
     ui->positionText->setText(solutionStr);
+}
+
+void MainWindow::test()
+{
+    QString posStr;
+    QString colorInput = ui->colorText->toPlainText();
+    string stdColor = colorInput.toStdString();
+    ui->positionText->setText(colorInput);
+    application.setModel(stdColor, cubeModel);
+    vector<string> positionStr = application.getCubeStringVector();
+    for (int i = 0; i < positionStr.size(); ++i)
+    {
+        if (i > 0)
+            posStr += " ";
+        posStr += QString::fromStdString(positionStr[i]);
+    }
+    ui->positionText->setText(posStr);
+    string solution = application.solve(positionStr);
+    QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(solution));
+    for(int i = 0; i < motorCmdList.size(); i++) {
+        motorOps->sendPacket(motorCmdList[i]);
+    }
+    //  qDebug << stdColor;
 }
