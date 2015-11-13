@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     mytimer.cpp \
     appinterface.cpp \
-    motorinterface.cpp
+    motorinterface.cpp \
+    dialog.cpp
 
 HEADERS  += \
     fastsolver.h \
@@ -28,9 +29,11 @@ HEADERS  += \
     mainwindow.h \
     mytimer.h \
     appinterface.h \
-    motorinterface.h
+    motorinterface.h \
+    dialog.h
 
 FORMS    += \
-    mainwindow.ui
+    mainwindow.ui \
+    dialog.ui
 
 QMAKE_CXXFLAGS += -std=c++0x
