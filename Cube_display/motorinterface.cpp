@@ -97,6 +97,13 @@ QByteArray MotorOpInterface::buildPacket(char mode, QList<int> motorControlArgs)
         packet[2] = (byte)'E';
         packet[3] = (byte)motorControlArgs[0];
     }
+    else if(mode == 'T') {
+        packetSize += 1;
+        packet[1] = (byte)packetSize;
+        packet[2] = (byte)'T';
+        packet[3] = (byte)motorControlArgs[0];
+    }
+
 
     // compute checksum for packet & append checksum value
     byte checksum = 0x00;
@@ -139,6 +146,8 @@ QList<QByteArray> MotorOpInterface::interpretSolution(QString solution) {
             motorCmdList.append(buildPacket('I', motorControlArgs));
         }
     }
+    motorCmdList.append(buildPacket('T', motorControlArgs));
+
     return motorCmdList;
 }
 
@@ -203,6 +212,8 @@ void MotorOpInterface::readSerial()
 
     for(int i = 0; i < serialData.size(); i++) {
         val = (unsigned char)serialData[i];
+        if(i == 2 && val == 84)
+            emit lastPacket();
         message.append(QString::number(val) + " ");
     }
     // for reading byte messages and interpeting as coherent string
@@ -225,3 +236,4 @@ void MotorOpInterface::closeConnection() {
     if(teensyPort->isOpen())
         teensyPort->close();
 }
+

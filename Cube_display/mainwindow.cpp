@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->initializeOnStartup();
     ui->timerLabel->setFont(timerFont);
     application.setTimerLabel(ui->timerLabel);
+    ui->generateButton->setEnabled(false);
+    ui->rotateButton->setEnabled(false);
+    QObject::connect(&motorOps, SIGNAL(lastPacket()), this, SLOT(endTimer()));
 }
 
 
@@ -153,28 +156,35 @@ void MainWindow::initializeDown()
         each->setPixmap(pixImages[DOWN]);
 }
 
-// Scan button click, start the timer, and reset the cube display
+// Scan button click, start the timer, and run testScan funtion simulating
+// vision input
 void MainWindow::on_scanButton_clicked()
 {
     qDebug("Scan Button Clicked, reset to default, start the timer");
-    application.startTimer();
-    this->resetCubeDisplay();
+   // application.startTimer();
+    this->testScan();
+    ui->generateButton->setEnabled(true);
+    //this->resetCubeDisplay();
 }
 
-// Generate button click, clear position string text area, and end the timer
+// Generate button click, end the timer, and run testSolve function
+// simulating the solving process
 void MainWindow::on_generateButton_clicked()
 {
     qDebug("Generate Solution Button Clicked, end the timer");
     //QString str = ui->textEdit->toPlainText();
-    ui->colorText->clear();
-    application.endTimer();
+    this->testSolve();
+    ui->rotateButton->setEnabled(true);
+    //application.endTimer();
 }
 
 // Rotate button click, randomize the cube, and solve a preset cube with solution printed to position string text area
 void MainWindow::on_rotateButton_clicked()
 {
     qDebug("Rotate Button Clicked, set to random");
-    this->test();
+    application.startTimer();
+    this->testRotate();
+    //application.endTimer();
 }
 
 // Update labels on all faces
@@ -236,74 +246,61 @@ void MainWindow::updateDown(int input[])
         each->setPixmap(pixImages[input[i++]]);
 }
 
-// For internal testing only
-void MainWindow::randomize()
-{
-    srand (time(NULL));
-    QString posStr, clcStr, solutionStr;
-    int cubeData[6][3][3];
-    // Randomize the cube
-    for(int i = 0; i < 6; i++)
-        for(int j = 0; j < 3; j++)
-            for(int k = 0; k < 3; k++)
-            cubeData[i][j][k] = rand()%6;
-    // Convert cube model from 3D array to 2D array, cubeData is the input, cube is the output
-    application.setModel(cubeData, cubeModel);
-    // Update labels based on cube model
-    this->updateLabels(cubeModel);
-    // Get and display the color string corresponding to cube model
-    string colorStr = application.getColorString();
-    clcStr = QString::fromStdString(colorStr);
-    ui->colorText->setText(clcStr);
+//%%%%%%%%%% For internal testing only %%%%%%%%%%%%%%%%%%%%%%%%%
 
-    // Get the position string of the current cube model (most likely invalid), and convert to QString
-    vector<string> positionStr = application.getCubeStringVector();
-    for (int i = 0; i < positionStr.size(); ++i)
-    {
-        if (i > 0)
-            posStr += " ";
-        posStr += QString::fromStdString(positionStr[i]);
-    }
-    // Preset cube model for solver
-    string scannedInput[] = {"RU","LF","RD","RF","FU","UL","BD","DF","RB","LB","BU","LD","LBD","URB","LUB","DRF","ULF","FLD","RDB","UFR"};
-    // Solve the preset model and get solution string
-    string out = application.solve(scannedInput);
-    solutionStr = QString::fromStdString(out);
-    // Display the solution
-    ui->positionText->setText(solutionStr);
-}
-
-// Test function for manual input cube data
+// Test scan function for manual input cube data
 // Input cube using color string, in the order of: TOP, LEFT, FRONT, RIGHT, BACK, DOWN
 // Each face should be input from left to right, top to bottom, and maintain orientation of the cube
 
-void MainWindow::test()
+void MainWindow::testScan()
 {
-    QString posStr;
     QString colorInput = ui->colorText->toPlainText();
     string stdColor = colorInput.toStdString();
-    ui->positionText->setText(colorInput);
+    //ui->positionText->setText(colorInput);
     application.setModel(stdColor, cubeModel);
-    vector<string> positionStr = application.getCubeStringVector();
-    for (int i = 0; i < positionStr.size(); ++i)
-    {
-        if (i > 0)
-            posStr += " ";
-        posStr += QString::fromStdString(positionStr[i]);
-    }
-    ui->positionText->setText(posStr);
     this->updateLabels(cubeModel);
 
     // Solve and interpret solutions
     // And send packets
 //    string inputStr[] = {"BL", "UF UR UB DB DF DB FL FR UL BR DL", "BLU", "UFR", "URB", "FDR", "LDF", "FUL", "DBR", "BDL"};
 
-    string solution = application.solve(positionStr);
-    string hello = "";
+
     /*
     QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(solution));
     for(int i = 0; i < motorCmdList.size(); i++) {
         motorOps.sendPacket(motorCmdList[i]);
     }*/
     //  qDebug << stdColor;
+}
+
+// Simulating solve by
+void MainWindow::testSolve()
+{
+    QString posStr;
+    vector<string> positionStr = application.getCubeStringVector();
+    for (int i = 0; i < positionStr.size(); ++i)
+    {
+        if (i > 0)
+            posStr += " ";
+        posStr += QString::fromStdString(positionStr[i]);
+    }
+    ui->colorText->setText(posStr);
+    cubeSolution = application.solve(positionStr);
+    ui->positionText->setText(QString::fromStdString(cubeSolution));
+}
+
+
+void MainWindow::testRotate()
+{
+    QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(cubeSolution));
+    for(int i = 0; i < motorCmdList.size(); i++) {
+        motorOps.sendPacket(motorCmdList[i]);
+    }
+
+    // application.endTimer();
+}
+
+void MainWindow::endTimer()
+{
+    application.endTimer();
 }

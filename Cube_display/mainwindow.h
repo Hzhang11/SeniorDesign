@@ -30,6 +30,7 @@ private slots:
     void on_generateButton_clicked();
     void on_scanButton_clicked();
     void on_rotateButton_clicked();
+    void endTimer();
 
 
 private:
@@ -37,6 +38,7 @@ private:
     AppInterface application;
     MotorOpInterface motorOps;
 
+    string cubeSolution;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
     void initializeOnStartup();
@@ -58,8 +60,9 @@ private:
     int cubeModel[6][9];
 
     // For internal testing only
-    void test();
-    void randomize();
+    void testScan();
+    void testSolve();
+    void testRotate();
 
 
 };

@@ -32,14 +32,15 @@ private:
     static const int stepperPayloadSize = 11;
     static const int packetWrapperSize = 4;
     // default motor accel & velocity parameters
-    static const int stdAccel = 40000;
-    static const int stdMaxVel = 2000;
+    static const int stdAccel = 120000;
+    static const int stdMaxVel = 6000;
 
     // functions
     QList<int> buildMotorArgs(char side, int stepMode);
     bool isOppositePair(QChar a, QChar b);
 signals:
     void readyRead(QString message);
+    void lastPacket();
 
 public slots:
     void readSerial();
