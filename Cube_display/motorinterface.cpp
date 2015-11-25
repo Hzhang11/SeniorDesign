@@ -198,7 +198,7 @@ QList<int> MotorOpInterface::buildMotorArgs(char side, int stepMode) {
     else if(stepMode == 2)
         motorControlArgs << 100;
     else
-        motorControlArgs << -50;
+        motorControlArgs << 150;
 
     return motorControlArgs;
 }
