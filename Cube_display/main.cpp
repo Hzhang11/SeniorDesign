@@ -8,10 +8,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    //Dialog k;
-    //k.show();
+   // MainWindow w;
+   // w.show();
+    Dialog k;
+    k.show();
 
     return a.exec();
 }
