@@ -222,7 +222,7 @@ QList<int> MotorOpInterface::decodeStep(QChar side, int stepMode) {
         else motorControlArgs << -50;
     }
 
-    qDebug() << "side: " << side << " args: " << motorControlArgs;
+    //qDebug() << "side: " << side << " args: " << motorControlArgs;
     return motorControlArgs;
 }
 

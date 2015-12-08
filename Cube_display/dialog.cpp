@@ -8,9 +8,8 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //motorOps = new MotorOpInterface();
     // set connection for serial reads from motor op interface & display the data in UI as received packet
-    //QObject::connect(motorOps, SIGNAL(readyRead(QString)), this, SLOT(displayRead(QString)));
+
 }
 
 // functions tied to Qt button events
@@ -86,6 +85,7 @@ Dialog::~Dialog() {
 // sets motor operations interface object from parent to this dialog
 void Dialog::setMotorOpInterface(MotorOpInterface *motorOpsIn) {
     motorOps = motorOpsIn;
+    QObject::connect(motorOps, SIGNAL(readyRead(QString)), this, SLOT(displayRead(QString)));
 }
 
 
