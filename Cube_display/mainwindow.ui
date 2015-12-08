@@ -19,8 +19,8 @@
      <rect>
       <x>480</x>
       <y>160</y>
-      <width>143</width>
-      <height>143</height>
+      <width>145</width>
+      <height>145</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_back_layout">
@@ -229,8 +229,8 @@
      <rect>
       <x>30</x>
       <y>160</y>
-      <width>143</width>
-      <height>143</height>
+      <width>145</width>
+      <height>145</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_left_layout">
@@ -447,9 +447,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>500</y>
-      <width>269</width>
+      <x>110</x>
+      <y>470</y>
+      <width>295</width>
       <height>33</height>
      </rect>
     </property>
@@ -482,8 +482,8 @@
      <rect>
       <x>180</x>
       <y>310</y>
-      <width>143</width>
-      <height>143</height>
+      <width>145</width>
+      <height>145</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_down_layout">
@@ -914,8 +914,8 @@
      <rect>
       <x>330</x>
       <y>160</y>
-      <width>143</width>
-      <height>143</height>
+      <width>145</width>
+      <height>145</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_right_layout">
@@ -1124,8 +1124,8 @@
      <rect>
       <x>180</x>
       <y>160</y>
-      <width>143</width>
-      <height>143</height>
+      <width>145</width>
+      <height>145</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_center_layout">
@@ -1334,8 +1334,8 @@
      <rect>
       <x>410</x>
       <y>40</y>
-      <width>281</width>
-      <height>52</height>
+      <width>295</width>
+      <height>59</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1391,6 +1391,19 @@
      <string>Output</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButtonLaunchDebugger">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>510</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Debug Mode</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1398,7 +1411,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>27</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

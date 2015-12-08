@@ -29,7 +29,6 @@ private:
     QTime tm;
     QLabel* lbl;
     bool running;
-
 };
 
 #endif // MYTIMER_H

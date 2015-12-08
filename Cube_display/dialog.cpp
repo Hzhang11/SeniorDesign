@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include "mainwindow.h"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -7,30 +8,46 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    motorOps = new MotorOpInterface();
+    //motorOps = new MotorOpInterface();
     // set connection for serial reads from motor op interface & display the data in UI as received packet
-    QObject::connect(motorOps, SIGNAL(readyRead(QString)), this, SLOT(displayRead(QString)));
+    //QObject::connect(motorOps, SIGNAL(readyRead(QString)), this, SLOT(displayRead(QString)));
 }
 
 // functions tied to Qt button events
 void Dialog::on_pushButtonStepImm_clicked()
 {
-    QList<int> motorControlArgs = fetchMotorControlArgs();
+    QList<int> motorControlArgs;
+    motorControlArgs << ui->spinBoxStepper->value();
+    motorControlArgs << ui->spinBoxPos->value();
+
     QByteArray ba = motorOps->buildPacket('I', motorControlArgs);
     ui->lineEdit->setText(QByteArrayToString(ba));
     motorOps->sendPacket(ba);
 }
 void Dialog::on_pushButtonStepDefer_clicked()
 {
-    QList<int> motorControlArgs = fetchMotorControlArgs();
+    QList<int> motorControlArgs;
+    motorControlArgs << ui->spinBoxStepper->value();
+    motorControlArgs << ui->spinBoxPos->value();
+
     QByteArray ba = motorOps->buildPacket('D', motorControlArgs);
     ui->lineEdit->setText(QByteArrayToString(ba));
     motorOps->sendPacket(ba);
 }
 void Dialog::on_pushButtonExeDef_clicked()
 {
-    QList<int> motorControlArgs = fetchMotorControlArgs();
+    QList<int> motorControlArgs;
     QByteArray ba = motorOps->buildPacket('E', motorControlArgs);
+    ui->lineEdit->setText(QByteArrayToString(ba));
+    motorOps->sendPacket(ba);
+}
+void Dialog::on_pushButtonSetParam_clicked()
+{
+    QList<int> motorControlArgs;
+    motorControlArgs << ui->spinBoxAccel->value();
+    motorControlArgs << ui->spinBoxVelo->value();
+
+    QByteArray ba = motorOps->buildPacket('P', motorControlArgs);
     ui->lineEdit->setText(QByteArrayToString(ba));
     motorOps->sendPacket(ba);
 }
@@ -47,24 +64,12 @@ void Dialog::on_pushButtonInterSolution_clicked()
 // each value is appended onto the resulting string with a space
 QString Dialog::QByteArrayToString(QByteArray inputArray) {
     QString resultString;
-
     // <!> probably a better way to do this....
     for(int i = 0; i < inputArray.size(); i++) {
         int val = (unsigned char)inputArray[i];
         resultString.append(QString::number(val) + " ");
     }
     return resultString;
-}
-
-// pulls values from each motor controls argument field & returns a QList of thier values
-QList<int> Dialog::fetchMotorControlArgs() {
-    QList<int> motorControlArgs;
-    motorControlArgs << ui->spinBoxStepper->value();
-    motorControlArgs << ui->spinBoxAccel->value();
-    motorControlArgs << ui->spinBoxVelo->value();
-    motorControlArgs << ui->spinBoxPos->value();
-
-    return motorControlArgs;
 }
 
 void Dialog::displayRead(QString input) {
@@ -77,3 +82,10 @@ Dialog::~Dialog() {
     motorOps->closeConnection();
     delete ui;
 }
+
+// sets motor operations interface object from parent to this dialog
+void Dialog::setMotorOpInterface(MotorOpInterface *motorOpsIn) {
+    motorOps = motorOpsIn;
+}
+
+

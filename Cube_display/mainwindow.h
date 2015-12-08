@@ -11,6 +11,7 @@
 #include "constants.h"
 #include "appinterface.h"
 #include "motorinterface.h"
+#include "dialog.h"
 #include <QFont>
 
 namespace Ui {
@@ -24,21 +25,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-
 private slots:
     void on_generateButton_clicked();
     void on_scanButton_clicked();
     void on_rotateButton_clicked();
     void endTimer();
 
+    void on_pushButtonLaunchDebugger_clicked();
 
 private:
     Ui::MainWindow *ui;
     AppInterface application;
-    MotorOpInterface motorOps;
-
     string cubeSolution;
+    MotorOpInterface motorOps;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
     void initializeOnStartup();
@@ -63,8 +62,6 @@ private:
     void testScan();
     void testSolve();
     void testRotate();
-
-
 };
 
 #endif // MAINWINDOW_H

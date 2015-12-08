@@ -2,12 +2,14 @@
 
 MotorOpInterface::MotorOpInterface(QObject *parent) : QObject(parent)
 {
+    ;
+}
+
+void MotorOpInterface::connectToTeensy() {
     // set up serialport object for accessing device & assume device is not present
     teensyPort = new QSerialPort;
     teensy_isAvaiable = false;
     teensy_portName = "";
-
-    QMessageBox* temp = new QMessageBox;
 
     // enumerate through available serial ports, check if they have both vendor/product indentifiers
     // if so, check if vendor/product indentifiers match with the pre-specified teensy device
@@ -23,8 +25,9 @@ MotorOpInterface::MotorOpInterface(QObject *parent) : QObject(parent)
         }
     }
 
+    QMessageBox* temp = new QMessageBox;
     // attempt to open communications to teensy serial port
-    // <!> needs check in error checking
+    // <!> needs some more error checking
     if(teensy_isAvaiable) {
         try {
             teensyPort->setPortName(teensy_portName);
@@ -37,7 +40,7 @@ MotorOpInterface::MotorOpInterface(QObject *parent) : QObject(parent)
             QObject::connect(teensyPort, SIGNAL(readyRead()), this, SLOT(readSerial()));
         }
         catch(std::exception &e){
-            qDebug() << "An exception occurred. " << e.what();
+            qDebug() << "An exception occurred while attempting to open communicatinos with Teensy device." << e.what();
         }
     }
     else
@@ -45,65 +48,74 @@ MotorOpInterface::MotorOpInterface(QObject *parent) : QObject(parent)
 }
 
 /* constructs and returns the motor command packet for sending to the Teensy microcontroller
- * operates under 3 modes, the packet structure is detailed below
+ * operates under 4 modes, the packet structure is detailed below
  --- packet structure ------------------------
 [start][packet size][op mode][payload][checksum]
- immediate & deferred motor commands - payload : [motor id][accel]*4bytes[velocity]*4bytes[step]*2bytes
- deferred execute motor commands - payload: [motor id]
-
- <!> immediate & deferred motor commands could be optimized to use less space
+ * -- functional purpose
+ - parameter set: for setting motor parameters (acceleration, max velocity, step dir, steps) to all motors
+ - immediate & deferred: for driving motors immediately or set for driving later (deferred)
+ - deferred execute: for driving deferred motors
+ - position reset: request all motors to rotate to home position
+ - last command:
+ * -- payload structure
+ - parameter set: [accel]*3bytes[velocity]*3bytes[step dir][steps]*2bytes
+ - immediate & deferred motor commands: [motor id]
+ - deferred execute motor commands: []
+ - position reset: []
+ - last command: []
 */
 QByteArray MotorOpInterface::buildPacket(char mode, QList<int> motorControlArgs) {
     int packetSize = packetWrapperSize;
 
     QByteArray packet(3, 0x00);
-    packet[0] = (byte)0x53; // set start byte, same as char 'S' or dec 83
+    packet[0] = (byte)'S'; // set start byte, same as 53H or dec 83
 
-    if(mode == 'D' || mode == 'I') {
-        packetSize += stepperPayloadSize; //<!> fixed for intermediate commands, needs change
+    if(mode == 'P') { // mode P: parameter set: [accel]*3bytes[velocity]*3bytes[step dir][steps]*2bytes
+        packetSize += parameterPayloadSize;
+        packet[1] = (byte)packetSize;
+        packet[2] = (byte)'P';
+        // pull values related to stepper config from received parameter list
+        int stepperArgs[3] = {};
+        stepperArgs[0] = motorControlArgs[0]; // acceleration
+        stepperArgs[1] = motorControlArgs[1]; // max velocity
 
+        // byte shift to set [accel] & [velocity] vals into corresponding bytes
+        packet[3] = (byte)(stepperArgs[0] >> 2*8);
+        packet[4] = (byte)(stepperArgs[0] >> 8);
+        packet[5] = (byte)stepperArgs[0];
+        packet[6] = (byte)(stepperArgs[1] >> 2*8);
+        packet[7] = (byte)(stepperArgs[1] >> 8);
+        packet[8] = (byte)stepperArgs[1];
+    }
+    else if(mode == 'R') { // mode R: position reset: []
+        packet[1] = (byte)packetSize;
+        packet[2] = (byte)'R';
+    }
+    else if(mode == 'D' || mode == 'I') { // mode I or D: immediate & deferred: [motor id]
+        packetSize += 4;
         packet[1] = (byte)packetSize;
         if(mode == 'I')
             packet[2] = (byte)'I';
         else
             packet[2] = (byte)'D';
 
-        // pull values related to stepper config from spin boxes
-        int stepperArgs[4] = {};
-        stepperArgs[0] = motorControlArgs[0];
-        stepperArgs[1] = motorControlArgs[1];
-        stepperArgs[2] = motorControlArgs[2];
-        stepperArgs[3] = motorControlArgs[3];
-
-        // build payload of serial command, <!> optimize this later
-        packet[3] = (byte)stepperArgs[0];
-        packet[4] = (byte)(stepperArgs[1] >> 3*8);
-        packet[5] = (byte)(stepperArgs[1] >> 2*8);
-        packet[6] = (byte)(stepperArgs[1] >> 8);
-        packet[7] = (byte)stepperArgs[1];
-        packet[8] = (byte)(stepperArgs[2] >> 3*8);
-        packet[9] = (byte)(stepperArgs[2] >> 2*8);
-        packet[10] = (byte)(stepperArgs[2] >> 8);
-        packet[11] = (byte)stepperArgs[2];
-        if(stepperArgs[3] > 0)
-            packet[12] = (byte)0;
+        packet[3] = motorControlArgs[0]; // set [motor id][step dir][steps]*2bytes
+        if(motorControlArgs[1] > 0) // check sign of steps to set [step dir]
+            packet[4] = 0;
         else
-            packet[12] = (byte)1;
-        packet[13] = (byte)abs(stepperArgs[3]);
+            packet[4] = 1;
+        // byte shift to set [steps] vals into corresponding bytes
+        packet[5] = (byte)(abs(motorControlArgs[1]) >> 8);
+        packet[6] = (byte)abs(motorControlArgs[1]);
     }
-    else if(mode == 'E') { // adjust packet for deferred execution mode
-        packetSize += 1;
+    else if(mode == 'E') { // mode E: deferred execution mode: []
         packet[1] = (byte)packetSize;
         packet[2] = (byte)'E';
-        packet[3] = (byte)motorControlArgs[0];
     }
-    else if(mode == 'T') {
-        packetSize += 1;
+    else if(mode == 'L') { // mode L: last command mode: []
         packet[1] = (byte)packetSize;
-        packet[2] = (byte)'T';
-        packet[3] = (byte)motorControlArgs[0];
+        packet[2] = (byte)'L';
     }
-
 
     // compute checksum for packet & append checksum value
     byte checksum = 0x00;
@@ -112,6 +124,18 @@ QByteArray MotorOpInterface::buildPacket(char mode, QList<int> motorControlArgs)
     }
     packet.append(checksum);
     return packet;
+}
+
+// returns built motor parameter packet based on given accelerataion & max velocity
+QByteArray MotorOpInterface::setParameters(int accel, int maxVel) {
+    QByteArray parameterCmd;
+    QList<int> motorControlArgs;
+
+    motorControlArgs << accel;
+    motorControlArgs << maxVel;
+
+    parameterCmd = buildPacket('P', motorControlArgs);
+    return parameterCmd;
 }
 
 // determine motor parameters & create corresponding deferred/execude deferred motor commands
@@ -128,25 +152,25 @@ QList<QByteArray> MotorOpInterface::interpretSolution(QString solution) {
         if(i+2 < solution.size()) {
             // detects adjecent rotation steps & builds deferred commands from motor parameters
             if(isOppositePair(solution[i], solution[i+2])) {
-                motorControlArgs = buildMotorArgs(solution[i].toLatin1(), solution[i+1].digitValue());
+                motorControlArgs = decodeStep(solution[i], solution[i+1].digitValue());
                 motorCmdList.append(buildPacket('D', motorControlArgs));
-                motorControlArgs = buildMotorArgs(solution[i+2].toLatin1(), solution[i+3].digitValue());
+                motorControlArgs = decodeStep(solution[i+2], solution[i+3].digitValue());
                 motorCmdList.append(buildPacket('D', motorControlArgs));
                 motorCmdList.append(buildPacket('E', motorControlArgs));
                 qDebug() << i << ":" << solution[i] << "-" << i+2 << ":" << solution[i+2];
                 i += 2; // adjust index to skip next already issued step due to opposite side detection
             }
-            else { //
-                motorControlArgs = buildMotorArgs(solution[i].toLatin1(), solution[i+1].digitValue());
+            else {
+                motorControlArgs = decodeStep(solution[i], solution[i+1].digitValue());
                 motorCmdList.append(buildPacket('I', motorControlArgs));
             }
         }
         else {
-            motorControlArgs = buildMotorArgs(solution[i].toLatin1(), solution[i+1].digitValue());
+            motorControlArgs = decodeStep(solution[i], solution[i+1].digitValue());
             motorCmdList.append(buildPacket('I', motorControlArgs));
         }
     }
-    motorCmdList.append(buildPacket('T', motorControlArgs));
+    motorCmdList.append(buildPacket('L', motorControlArgs));
 
     return motorCmdList;
 }
@@ -171,11 +195,11 @@ bool MotorOpInterface::isOppositePair(QChar a, QChar b) {
 // stepMode format:
 //  - 1 = 90 degrees clockwise (50 steps)
 //  - 2 = 180 degrees (either, 100 steps)
-//  - 3 = 90 degrees counterclockwise (50 steps)
-QList<int> MotorOpInterface::buildMotorArgs(char side, int stepMode) {
+//  - 3 = 90 degrees counterclockwise
+QList<int> MotorOpInterface::decodeStep(QChar side, int stepMode) {
     QList<int> motorControlArgs;
 
-    // assign sides to proper motor id
+    // assign motor ID based on side given
     if(side == 'U')
         motorControlArgs << 1;
     else if(side == 'L')
@@ -188,18 +212,17 @@ QList<int> MotorOpInterface::buildMotorArgs(char side, int stepMode) {
         motorControlArgs << 5;
     else
         motorControlArgs << 6;
-
-    motorControlArgs << (int) stdAccel;
-    motorControlArgs << (int) stdMaxVel;
-
     // assign steps based on rotation mode
     if(stepMode == 1)
         motorControlArgs << 50;
     else if(stepMode == 2)
         motorControlArgs << 100;
-    else
-        motorControlArgs << 150;
+    else {
+        if(singleDirectionOpMode) motorControlArgs << 150;
+        else motorControlArgs << -50;
+    }
 
+    qDebug() << "side: " << side << " args: " << motorControlArgs;
     return motorControlArgs;
 }
 
@@ -216,9 +239,6 @@ void MotorOpInterface::readSerial()
             emit lastPacket();
         message.append(QString::number(val) + " ");
     }
-    // for reading byte messages and interpeting as coherent string
-    //message = QString::fromStdString(serialData.toStdString());
-    //feedbackBuffer += message;
     emit readyRead(message);
 }
 
@@ -236,4 +256,6 @@ void MotorOpInterface::closeConnection() {
     if(teensyPort->isOpen())
         teensyPort->close();
 }
+
+
 

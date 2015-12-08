@@ -8,6 +8,8 @@
 #include <QList>
 #include <QtWidgets>
 
+#include "constants.h"
+
 typedef unsigned char byte; // define equivalent indentifier 'byte' for linux platform
 
 class MotorOpInterface : public QObject
@@ -19,6 +21,8 @@ public:
     void sendPacket(QByteArray packet);
     void closeConnection();
     QList<QByteArray> interpretSolution(QString solution);
+    QByteArray setParameters(int accel, int maxVel);
+    void connectToTeensy();
 
 private:
     // set variables to indentify serial port used to access teensy device
@@ -28,16 +32,15 @@ private:
     bool teensy_isAvaiable;
     QString teensy_portName;
 
-    // packet size
+    // packet size values for each mode
     static const int stepperPayloadSize = 11;
+    static const int parameterPayloadSize = 6;
     static const int packetWrapperSize = 4;
-    // default motor accel & velocity parameters
-    static const int stdAccel = 120000;
-    static const int stdMaxVel = 6000;
 
     // functions
-    QList<int> buildMotorArgs(char side, int stepMode);
     bool isOppositePair(QChar a, QChar b);
+    QList<int> decodeStep(QChar side, int stepMode);
+
 signals:
     void readyRead(QString message);
     void lastPacket();

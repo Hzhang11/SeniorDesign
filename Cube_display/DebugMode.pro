@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = DebugMode
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
     solver.cpp \
     fastsolver.cpp \

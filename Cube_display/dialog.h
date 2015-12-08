@@ -5,10 +5,12 @@
 #include <QDebug>
 #include <QtWidgets>
 #include <QObject>
+
 #include "motorinterface.h"
+#include "mainwindow.h"
 
 namespace Ui {
-class Dialog;
+    class Dialog;
 }
 
 class Dialog : public QDialog
@@ -18,6 +20,7 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
+    void setMotorOpInterface(MotorOpInterface *motorOpsIn);
 
 private slots:
     void on_pushButtonStepImm_clicked();
@@ -26,10 +29,11 @@ private slots:
     void displayRead(QString in);
     void on_pushButtonInterSolution_clicked();
 
+    void on_pushButtonSetParam_clicked();
+
 private:
     Ui::Dialog *ui;
-
-    MotorOpInterface* motorOps;
+    MotorOpInterface *motorOps;
     // functions
     QList<int> fetchMotorControlArgs();
     QString QByteArrayToString(QByteArray inArray);

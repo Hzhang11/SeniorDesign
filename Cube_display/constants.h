@@ -22,6 +22,12 @@ const int edges[] = {719, 528, 137, 310, 4625, 5034, 5243, 4816, 2330, 2114, 393
 const int corners[] = {82027, 22936, 3809, 61118, 473326, 452417, 511544, 534235};
 const QFont timerFont( "Arial", 28, QFont::Bold);
 
+// default motor accel & velocity parameters
+static const int stdAccel = 80000;
+static const int stdMaxVel = 70000;
+
+// motor control-based parameters
+static const bool singleDirectionOpMode = true;
 
 #endif // CONSTANTS
 

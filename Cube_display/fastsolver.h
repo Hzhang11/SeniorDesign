@@ -11,7 +11,6 @@ using namespace std;
 
 typedef vector<int> vi;
 
-
 class FastSolver
 {
 

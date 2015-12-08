@@ -8,15 +8,17 @@
 #include "mytimer.h"
 #include "modelprocessor.h"
 #include "fastsolver.h"
-
+#include "motorinterface.h"
 
 using namespace std;
 
 class AppInterface
 {
 public:
+    // constructors
     AppInterface();
     AppInterface(QLabel* label);
+    // public functions
     void setTimerLabel(QLabel* label);
     void startTimer();
     void endTimer();
@@ -26,13 +28,16 @@ public:
     void setModel(int cubeInput[6][3][3], int cubeOutput[6][9]);
     string getColorString();
     vector<string> getCubeStringVector();
+    // public
+
+    MotorOpInterface getMotorOpInterface();
+
 
 private:
     MyTimer timer;
     ModelProcessor processor;
     FastSolver solver;
-
-
+    MotorOpInterface motorOps;
 };
 
 #endif // APPINTERFACE_H

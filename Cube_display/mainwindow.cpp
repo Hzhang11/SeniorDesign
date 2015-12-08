@@ -14,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     application.setTimerLabel(ui->timerLabel);
     ui->generateButton->setEnabled(false);
     ui->rotateButton->setEnabled(false);
+    motorOps.connectToTeensy();
     QObject::connect(&motorOps, SIGNAL(lastPacket()), this, SLOT(endTimer()));
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -187,6 +187,15 @@ void MainWindow::on_rotateButton_clicked()
     //application.endTimer();
 }
 
+// Launches cube debug controls
+void MainWindow::on_pushButtonLaunchDebugger_clicked()
+{
+    Dialog *debugWindow = new Dialog();
+    debugWindow->show();
+
+    debugWindow->setMotorOpInterface(&motorOps);
+}
+
 // Update labels on all faces
 void MainWindow::updateLabels(int cubeData[6][9])
 {
@@ -289,14 +298,17 @@ void MainWindow::testSolve()
     ui->positionText->setText(QString::fromStdString(cubeSolution));
 }
 
-
+// set motor parameters, interpret solution & send motor commands
+// <!> might want to move set motor parameters to initialization only
 void MainWindow::testRotate()
 {
+    QByteArray parameterCmd = motorOps.setParameters(stdAccel, stdMaxVel);
     QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(cubeSolution));
+
+    motorOps.sendPacket(parameterCmd);
     for(int i = 0; i < motorCmdList.size(); i++) {
         motorOps.sendPacket(motorCmdList[i]);
     }
-
     // application.endTimer();
 }
 
@@ -304,3 +316,5 @@ void MainWindow::endTimer()
 {
     application.endTimer();
 }
+
+
