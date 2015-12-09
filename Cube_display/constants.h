@@ -23,11 +23,17 @@ const int corners[] = {82027, 22936, 3809, 61118, 473326, 452417, 511544, 534235
 const QFont timerFont( "Arial", 28, QFont::Bold);
 
 // default motor accel & velocity parameters
-static const int stdAccel = 80000;
-static const int stdMaxVel = 70000;
+static const int STDACCEL = 80000;
+static const int STDMAXVEL = 70000;
 
-// motor control-based parameters
-static const bool singleDirectionOpMode = true;
+enum sideVals {
+    U = 1,
+    L = 2,
+    F = 3,
+    R = 4,
+    B = 5,
+    D = 6,
+};
 
 #endif // CONSTANTS
 

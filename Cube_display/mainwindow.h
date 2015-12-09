@@ -30,11 +30,12 @@ private slots:
     void on_scanButton_clicked();
     void on_rotateButton_clicked();
     void endTimer();
-
+    void emergencyStopNotification();
     void on_pushButtonLaunchDebugger_clicked();
 
 private:
     Ui::MainWindow *ui;
+
     AppInterface application;
     string cubeSolution;
     MotorOpInterface motorOps;

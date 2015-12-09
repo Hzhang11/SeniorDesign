@@ -28,15 +28,17 @@ private slots:
     void on_pushButtonExeDef_clicked();
     void displayRead(QString in);
     void on_pushButtonInterSolution_clicked();
-
     void on_pushButtonSetParam_clicked();
+    void on_pushButtonRandSol_clicked();
+    void on_checkBoxBiDirectionalMode_toggled(bool checked);
+
 
 private:
     Ui::Dialog *ui;
     MotorOpInterface *motorOps;
     // functions
     QList<int> fetchMotorControlArgs();
-    QString QByteArrayToString(QByteArray inArray);
+    QString QByteArrayToString(QByteArray inputArray);
 };
 
 #endif // DIALOG_H

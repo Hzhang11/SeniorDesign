@@ -16,12 +16,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->rotateButton->setEnabled(false);
     motorOps.connectToTeensy();
     QObject::connect(&motorOps, SIGNAL(lastPacket()), this, SLOT(endTimer()));
+    QObject::connect(&motorOps, SIGNAL(stopPacket()), this, SLOT(emergencyStopNotification()));
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     motorOps.closeConnection();
+    delete ui;
 }
 
 // Initialize initial cube display
@@ -302,7 +303,7 @@ void MainWindow::testSolve()
 // <!> might want to move set motor parameters to initialization only
 void MainWindow::testRotate()
 {
-    QByteArray parameterCmd = motorOps.setParameters(stdAccel, stdMaxVel);
+    QByteArray parameterCmd = motorOps.setParameters(STDACCEL, STDMAXVEL);
     QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(cubeSolution));
 
     motorOps.sendPacket(parameterCmd);
@@ -315,6 +316,12 @@ void MainWindow::testRotate()
 void MainWindow::endTimer()
 {
     application.endTimer();
+}
+void MainWindow::emergencyStopNotification()
+{
+    //QMessageBox* temp = new QMessageBox;
+    //QMessageBox::information(temp, "Emergency Stop Triggered", "E-stop triggered. Please power off & readjust motors prior to reuse. Have a nice day.");
+    qDebug() << "E-stop trigggered";
 }
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>642</width>
-    <height>298</height>
+    <width>749</width>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,52 +36,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>60</y>
-     <width>66</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Solution</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>90</y>
-     <width>291</width>
-     <height>107</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="pushButtonStepImm">
-      <property name="text">
-       <string>send step immediate packet</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButtonStepDefer">
-      <property name="text">
-       <string>send step deferred packet</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButtonExeDef">
-      <property name="text">
-       <string>execute defered packet</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
@@ -94,84 +48,6 @@
    <property name="text">
     <string>Sent</string>
    </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditSolution">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>80</y>
-     <width>291</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="readOnly">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonInterSolution">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>110</y>
-     <width>291</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Interpret Solution</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>291</width>
-     <height>33</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QSpinBox" name="spinBoxStepper">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>6</number>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="spinBoxAccel">
-      <property name="maximum">
-       <number>200000</number>
-      </property>
-      <property name="value">
-       <number>80000</number>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="spinBoxVelo">
-      <property name="maximum">
-       <number>200000</number>
-      </property>
-      <property name="value">
-       <number>70000</number>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="spinBoxPos">
-      <property name="minimum">
-       <number>-1000</number>
-      </property>
-      <property name="maximum">
-       <number>100</number>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
@@ -186,88 +62,301 @@
     <string>Received</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget_3">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Stepper</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Acceleration</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Velocity</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Position</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QPushButton" name="pushButtonSetParam">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>30</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Set Parameters</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>140</y>
+     <x>10</x>
+     <y>10</y>
      <width>221</width>
-     <height>31</height>
+     <height>191</height>
     </rect>
    </property>
-   <property name="text">
-    <string>PushButton</string>
+   <property name="title">
+    <string>Single Side Control</string>
    </property>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>201</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QSpinBox" name="spinBoxStepper">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>6</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBoxPos">
+       <property name="minimum">
+        <number>-1000</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButtonStepDefer">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>send step deferred packet</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonStepImm">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>send step immediate packet</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonExeDef">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>execute deferred packets</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Stepper</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Position</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
-  <widget class="QSpinBox" name="spinBoxPos_2">
+  <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>140</y>
-     <width>66</width>
-     <height>31</height>
+     <x>240</x>
+     <y>10</y>
+     <width>221</width>
+     <height>191</height>
     </rect>
    </property>
-   <property name="minimum">
-    <number>-1000</number>
+   <property name="title">
+    <string>Driving Parameters</string>
    </property>
-   <property name="maximum">
-    <number>100</number>
-   </property>
+   <widget class="QWidget" name="layoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Acceleration</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Max Velocity</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QSpinBox" name="spinBoxAccel">
+       <property name="maximum">
+        <number>200000</number>
+       </property>
+       <property name="value">
+        <number>80000</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBoxVelo">
+       <property name="maximum">
+        <number>200000</number>
+       </property>
+       <property name="value">
+        <number>70000</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButtonSetParam">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Set Parameters</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxBiDirectionalMode">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bidirectional Rotation</string>
+    </property>
+   </widget>
   </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>10</y>
+     <width>271</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Sequence Testing</string>
+   </property>
+   <widget class="QPushButton" name="pushButtonInterSolution">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Interpret Solution</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditSolution">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>251</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonRandSol">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generate</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBoxRandSteps">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>66</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>-1000</number>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>110</y>
+      <width>96</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Steps to Create</string>
+    </property>
+   </widget>
+  </widget>
+  <zorder>groupBox_3</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>lineEditReceived</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>groupBox_4</zorder>
  </widget>
  <resources/>
  <connections/>

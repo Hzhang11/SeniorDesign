@@ -17,12 +17,14 @@ class MotorOpInterface : public QObject
     Q_OBJECT
 public:
     explicit MotorOpInterface(QObject *parent = 0);
-    QByteArray buildPacket(char mode, QList<int> motorControlArgs);
     void sendPacket(QByteArray packet);
+    void connectToTeensy();
     void closeConnection();
     QList<QByteArray> interpretSolution(QString solution);
+    QByteArray buildPacket(char mode, QList<int> motorControlArgs);
     QByteArray setParameters(int accel, int maxVel);
-    void connectToTeensy();
+    QChar encodeSides(int val);
+    void toggleSingleSideOp();
 
 private:
     // set variables to indentify serial port used to access teensy device
@@ -30,6 +32,7 @@ private:
     static const quint16 teensy_vendID = 5824;
     static const quint16 teensy_prodID = 1155;
     bool teensy_isAvaiable;
+    bool singleDirectionOpMode = true;
     QString teensy_portName;
 
     // packet size values for each mode
@@ -44,6 +47,7 @@ private:
 signals:
     void readyRead(QString message);
     void lastPacket();
+    void stopPacket();
 
 public slots:
     void readSerial();

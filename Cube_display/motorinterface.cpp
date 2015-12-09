@@ -43,8 +43,7 @@ void MotorOpInterface::connectToTeensy() {
             qDebug() << "An exception occurred while attempting to open communicatinos with Teensy device." << e.what();
         }
     }
-    else
-        QMessageBox::warning(temp, "Port Error", "Can't find prespecified Teensy device.");
+    else QMessageBox::warning(temp, "Port Error", "Can't find prespecified Teensy device.");
 }
 
 /* constructs and returns the motor command packet for sending to the Teensy microcontroller
@@ -101,9 +100,9 @@ QByteArray MotorOpInterface::buildPacket(char mode, QList<int> motorControlArgs)
 
         packet[3] = motorControlArgs[0]; // set [motor id][step dir][steps]*2bytes
         if(motorControlArgs[1] > 0) // check sign of steps to set [step dir]
-            packet[4] = 0;
-        else
             packet[4] = 1;
+        else
+            packet[4] = 0;
         // byte shift to set [steps] vals into corresponding bytes
         packet[5] = (byte)(abs(motorControlArgs[1]) >> 8);
         packet[6] = (byte)abs(motorControlArgs[1]);
@@ -157,7 +156,6 @@ QList<QByteArray> MotorOpInterface::interpretSolution(QString solution) {
                 motorControlArgs = decodeStep(solution[i+2], solution[i+3].digitValue());
                 motorCmdList.append(buildPacket('D', motorControlArgs));
                 motorCmdList.append(buildPacket('E', motorControlArgs));
-                qDebug() << i << ":" << solution[i] << "-" << i+2 << ":" << solution[i+2];
                 i += 2; // adjust index to skip next already issued step due to opposite side detection
             }
             else {
@@ -201,17 +199,17 @@ QList<int> MotorOpInterface::decodeStep(QChar side, int stepMode) {
 
     // assign motor ID based on side given
     if(side == 'U')
-        motorControlArgs << 1;
+        motorControlArgs << sideVals::U;
     else if(side == 'L')
-        motorControlArgs << 2;
+        motorControlArgs << sideVals::L;
     else if(side == 'F')
-        motorControlArgs << 3;
-    else if(side == 'D')
-        motorControlArgs << 4;
+        motorControlArgs << sideVals::F;
     else if(side == 'R')
-        motorControlArgs << 5;
+        motorControlArgs << sideVals::R;
+    else if(side == 'B')
+        motorControlArgs << sideVals::B;
     else
-        motorControlArgs << 6;
+        motorControlArgs << sideVals::D;
     // assign steps based on rotation mode
     if(stepMode == 1)
         motorControlArgs << 50;
@@ -221,9 +219,25 @@ QList<int> MotorOpInterface::decodeStep(QChar side, int stepMode) {
         if(singleDirectionOpMode) motorControlArgs << 150;
         else motorControlArgs << -50;
     }
-
-    //qDebug() << "side: " << side << " args: " << motorControlArgs;
     return motorControlArgs;
+}
+
+// assigns side indentification character based on the motor ID given
+QChar MotorOpInterface::encodeSides(int val) {
+    QChar side;
+    if(val == sideVals::U)
+        side = 'U';
+    else if(val == sideVals::L)
+        side = 'L';
+    else if(val == sideVals::F)
+        side = 'F';
+    else if(val == sideVals::R)
+        side = 'R';
+    else if(val == sideVals::B)
+        side = 'B';
+    else
+        side = 'D';
+    return side;
 }
 
 // reads entire message sent from the Teensy device & converts message to displayable string whenever a message is received
@@ -231,15 +245,20 @@ void MotorOpInterface::readSerial()
 {
     QByteArray serialData = teensyPort->readAll();
     QString message = "";
-    int val;
+    int val, modeIndex = 2;
 
     for(int i = 0; i < serialData.size(); i++) {
         val = (unsigned char)serialData[i];
-        if(i == 2 && val == 84)
-            emit lastPacket();
+        if(i == modeIndex) {
+            if(val == 'L')
+                emit lastPacket();
+            else if(val == 'M')
+                emit stopPacket();
+        }
         message.append(QString::number(val) + " ");
     }
     emit readyRead(message);
+    qDebug() << message;
 }
 
 // send packet to designated port of Teensy device
@@ -257,5 +276,10 @@ void MotorOpInterface::closeConnection() {
         teensyPort->close();
 }
 
+// toggles single direction motor driving flag
+void MotorOpInterface::toggleSingleSideOp() {
+    singleDirectionOpMode = !singleDirectionOpMode;
+    //qDebug() << "direction mode: " << singleDirectionOpMode;
+}
 
 
