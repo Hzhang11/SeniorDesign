@@ -264,26 +264,17 @@ void MainWindow::updateDown(int input[])
 
 void MainWindow::testScan()
 {
+    /*
     QString colorInput = ui->colorText->toPlainText();
     string stdColor = colorInput.toStdString();
-    //ui->positionText->setText(colorInput);
+    */
+    visionApp.get_array(cubeModel);
     application.setModel(stdColor, cubeModel);
     this->updateLabels(cubeModel);
 
-    // Solve and interpret solutions
-    // And send packets
-//    string inputStr[] = {"BL", "UF UR UB DB DF DB FL FR UL BR DL", "BLU", "UFR", "URB", "FDR", "LDF", "FUL", "DBR", "BDL"};
-
-
-    /*
-    QList<QByteArray> motorCmdList = motorOps.interpretSolution(QString::fromStdString(solution));
-    for(int i = 0; i < motorCmdList.size(); i++) {
-        motorOps.sendPacket(motorCmdList[i]);
-    }*/
-    //  qDebug << stdColor;
 }
 
-// Simulating solve by
+// Simulating solve
 void MainWindow::testSolve()
 {
     QString posStr;
@@ -325,3 +316,8 @@ void MainWindow::emergencyStopNotification()
 }
 
 
+
+void MainWindow::on_fixButton_clicked()
+{
+
+}

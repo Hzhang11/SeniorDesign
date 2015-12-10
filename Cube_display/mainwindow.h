@@ -12,6 +12,7 @@
 #include "appinterface.h"
 #include "motorinterface.h"
 #include "dialog.h"
+#include "vision.h"
 #include <QFont>
 
 namespace Ui {
@@ -33,12 +34,15 @@ private slots:
     void emergencyStopNotification();
     void on_pushButtonLaunchDebugger_clicked();
 
+    void on_fixButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     AppInterface application;
     string cubeSolution;
     MotorOpInterface motorOps;
+    Vision visionApp;
     QPixmap pixImages[6];
     QList<QLabel *> topLabelGroup, leftLabelGroup, frontLabelGroup, rightLabelGroup, backLabelGroup, downLabelGroup;
     void initializeOnStartup();

@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     mytimer.cpp \
     appinterface.cpp \
     motorinterface.cpp \
-    dialog.cpp
+    dialog.cpp \
+    vision.cpp
 
 HEADERS  += \
     fastsolver.h \
@@ -29,10 +30,15 @@ HEADERS  += \
     mytimer.h \
     appinterface.h \
     motorinterface.h \
-    dialog.h
+    dialog.h \
+    vision.h
 
 FORMS    += \
     mainwindow.ui \
     dialog.ui
 
 QMAKE_CXXFLAGS += -std=c++0x
+
+INCLUDEPATH += "/usr/local/include/"
+
+LIBS += `pkg-config --libs opencv`
