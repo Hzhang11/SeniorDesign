@@ -914,8 +914,8 @@
      <rect>
       <x>330</x>
       <y>160</y>
-      <width>141</width>
-      <height>141</height>
+      <width>143</width>
+      <height>143</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="cube_right_layout">
@@ -1440,7 +1440,7 @@
      </rect>
     </property>
     <property name="maximum">
-     <number>6</number>
+     <number>5</number>
     </property>
    </widget>
    <widget class="QSpinBox" name="tileSpinBox">
@@ -1516,6 +1516,19 @@
     </property>
     <property name="text">
      <string>Color Note: </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inputButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>530</y>
+      <width>98</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manual Input</string>
     </property>
    </widget>
   </widget>

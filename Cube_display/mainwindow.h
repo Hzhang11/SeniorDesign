@@ -36,6 +36,8 @@ private slots:
 
     void on_fixButton_clicked();
 
+    void on_inputButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -61,7 +63,7 @@ private:
     void updateBack(int back[9]);
     void updateDown(int down[9]);
     // Cube model used to store cube data
-    int cubeModel[6][9];
+    int cubeModelInput[6][9], cubeModelOutput[6][9];
 
     // For internal testing only
     void testScan();

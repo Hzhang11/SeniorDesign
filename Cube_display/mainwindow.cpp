@@ -268,10 +268,9 @@ void MainWindow::testScan()
     QString colorInput = ui->colorText->toPlainText();
     string stdColor = colorInput.toStdString();
     */
-    visionApp.get_array(cubeModel);
-    application.setModel(stdColor, cubeModel);
-    this->updateLabels(cubeModel);
-
+    visionApp.get_array(cubeModelInput);
+    application.setModel(cubeModelInput, cubeModelOutput);
+    this->updateLabels(cubeModelOutput);
 }
 
 // Simulating solve
@@ -319,5 +318,20 @@ void MainWindow::emergencyStopNotification()
 
 void MainWindow::on_fixButton_clicked()
 {
+    int position = ui->faceSpinBox->value();
+    int tile = ui->tileSpinBox->value();
+    int color = ui->colorSpinBox->value();
+    qDebug() << "Position: " << position << "Tile: " << tile << "Color" <<color;
+    cubeModelOutput[position][tile] = color;
+    application.setModel(cubeModelOutput, cubeModelOutput);
+    this->updateLabels(cubeModelOutput);
+}
 
+void MainWindow::on_inputButton_clicked()
+{
+    QString colorInput = ui->colorText->toPlainText();
+    string stdColor = colorInput.toStdString();
+    application.setModel(stdColor, cubeModelOutput);
+    this->updateLabels(cubeModelOutput);
+    ui->generateButton->setEnabled(true);
 }

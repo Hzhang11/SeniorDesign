@@ -316,23 +316,6 @@ void Vision::get_array(int faces[6][9])
   faces[4][7] = assign_color( image1, 358, 51);
   faces[4][8] = assign_color( image0, 270, 294);
 
-/*
-  std::cout <<"Image 0 Modified" << std::endl;
-  faces[0][1] = assign_color( denoised, 363, 62, 0);
-  faces[0][2] = assign_color( denoised, 293, 94, 0);
-  faces[0][5] = assign_color( denoised, 227, 58, 0);
-  faces[2][0] = assign_color( denoised, 330, 156, 0);
-  faces[2][1] = assign_color( denoised, 395, 114, 0);
-  faces[2][2] = assign_color( denoised, 445, 85, 0);
-  faces[2][3] = assign_color( denoised, 327, 235, 0);
-  faces[2][6] = assign_color( denoised, 321, 293, 0);
-  faces[4][0] = assign_color( denoised, 140, 94, 0);
-  faces[4][1] = assign_color( denoised, 193, 119, 0);
-  faces[4][2] = assign_color( denoised, 256, 156, 0);
-  faces[4][5] = assign_color( denoised, 265, 237, 0);
-  faces[4][8] = assign_color( denoised, 270, 294, 0);
-*/
-
   std::cout << "Blue" << std::endl;
   faces[5][0] = assign_color( image2, 356, 148);
   faces[5][1] = assign_color( image2, 420, 103);

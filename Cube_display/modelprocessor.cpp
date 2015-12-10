@@ -25,12 +25,13 @@ ModelProcessor::ModelProcessor()
 }
 
 // Set 2D cube array
-void ModelProcessor::setCubeArray(int cubeIn[6][3][3], int cubeOut[6][9])
+void ModelProcessor::setCubeArray(int cubeIn[6][9], int cubeOut[6][9])
 {
+    colorString.clear();
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 9; j++) {
-            cube[i][j] = cubeIn[i][j/3][j%3];
-            cubeOut[i][j] = cubeIn[i][j/3][j%3];
+            cube[i][j] = cubeIn[i][j];
+            cubeOut[i][j] = cubeIn[i][j];
         }
     for(int face: faceOrder)
         for(int j = 0; j < 9; j++)

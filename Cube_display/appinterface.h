@@ -25,7 +25,7 @@ public:
     string solve(vector<string> input);
     string solve(string input[20]);
     void setModel(string colorString, int cubeOutput[6][9]);
-    void setModel(int cubeInput[6][3][3], int cubeOutput[6][9]);
+    void setModel(int cubeInput[6][9], int cubeOutput[6][9]);
     string getColorString();
     vector<string> getCubeStringVector();
     // public

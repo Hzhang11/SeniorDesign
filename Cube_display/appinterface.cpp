@@ -39,7 +39,7 @@ string AppInterface::solve(vector<string> input)
     return solver.solve(tempInput);
 }
 
-void AppInterface::setModel(int cubeInput[6][3][3], int cubeOutput[6][9])
+void AppInterface::setModel(int cubeInput[6][9], int cubeOutput[6][9])
 {
     processor.setCubeArray(cubeInput, cubeOutput);
 }
